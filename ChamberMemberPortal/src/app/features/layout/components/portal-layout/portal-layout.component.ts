@@ -25,11 +25,5 @@ import { HotLinksComponent } from '../../../dashboard/components/hot-links/hot-l
 })
 export class PortalLayoutComponent {
   readonly dashboard = DASHBOARD_DATA;
-  readonly topNav = [
-    { label: 'Home', path: '/' },
-    { label: 'Events', path: '/events' },
-    { label: 'Resources', path: '/resources' },
-    { label: 'News', path: '/news' },
-    { label: 'Settings', path: '/settings' }
-  ];
+  readonly topNav = DASHBOARD_DATA.topTabs;
 }

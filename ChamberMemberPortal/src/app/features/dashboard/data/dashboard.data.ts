@@ -6,19 +6,33 @@ export const DASHBOARD_DATA: DashboardModel = {
   memberLocation: 'Barbara S. Ponce Library',
   welcomeText:
     'ChamberMaster is your direct connection to the Pinellas Park/Gateway Chamber of Commerce. As a member of the Pinellas Park/Gateway Chamber of Commerce you have the opportunity to market your business to consumers visiting pinellaspark.com by enhancing your information home page with pictures and text, add an also post hot deals, job openings and events, add keywords to help consumers find you when they run searches, and run reports to see hit statistics for your home page and other advertised items.',
-  topTabs: ['Home', 'Events', 'Resources', 'News', 'Settings'],
-  menuItems: [
-    { label: 'Personal Information', icon: 'bi bi-person' },
-    { label: 'Company Information', icon: 'bi bi-building' },
-    { label: 'Hot Deals', icon: 'bi bi-gear' },
-    { label: 'Member To Member Deals', icon: 'bi bi-alarm' },
-    { label: 'News Releases', icon: 'bi bi-alarm' },
-    { label: 'Job Postings', icon: 'bi bi-alarm' },
-    { label: 'MarketSpace', icon: 'bi bi-alarm' },
-    { label: 'Request for Proposals', icon: 'bi bi-alarm' }
+  topTabs: [
+    { label: 'Home', icon: 'bi bi-person',path: '/' },
+    { label: 'Events', icon: 'bi bi-calendar',path: '/events' },
+    { label: 'Resources', icon: 'bi bi-folder',path: '/resources' },
+    { label: 'News', icon: 'bi bi-newspaper',path: '/news' },
+    { label: 'Settings', icon: 'bi bi-gear',path: '/settings' }
   ],
+
+  menuItems: [
+    { label: 'Personal Information', icon: 'bi bi-person',path: '/personal-information' },
+    { label: 'Company Information', icon: 'bi bi-building',path: '/company-information' },
+    { label: 'Hot Deals', icon: 'bi bi-gear',path: '/hot-deals' },
+    { label: 'Member To Member Deals', icon: 'fa-solid fa-handshake',path: '/member-to-member-deals' },
+    { label: 'News Releases', icon: 'bi bi-newspaper',path: '/news-releases' },
+    { label: 'Job Postings', icon: 'fa fa-briefcase',path: '/job-postings' },
+    { label: 'MarketSpace', icon: 'bi bi-shop',path: '/marketspace' },
+    { label: 'Request for Proposals', icon: 'fa fa-file-text',path: '/request-for-proposals' }
+  ],
+    
   hotLinks: [{ label: 'Chamber Forums' }, { label: 'Additional Links' }, { label: 'Additional Links - 2' }],
-  quickLinks: ['Hot Deals', 'Job Postings', 'MarketSpace', 'News Releases', 'Request for Proposals'],
+  quickLinks: [
+    { label: 'Hot Deals', icon: 'bi bi-gear',path: '/hot-deals' },
+    { label: 'Job Postings', icon: 'fa fa-briefcase',path: '/job-postings' },
+    { label: 'MarketSpace', icon: 'bi bi-shop',path: '/marketspace' },
+    { label: 'News Releases', icon: 'bi bi-newspaper',path: '/news-releases' },
+    { label: 'Request for Proposals', icon: 'fa fa-file-text',path: '/request-for-proposals' }
+  ],
   upcomingEvent: {
     month: 'May',
     day: '07',

@@ -8,10 +8,10 @@ export interface DashboardModel {
   memberName: string;
   memberLocation: string;
   welcomeText: string;
-  topTabs: string[];
+  topTabs: MenuItem[];
   menuItems: MenuItem[];
   hotLinks: HotLink[];
-  quickLinks: string[];
+  quickLinks: MenuItem[];
   upcomingEvent: Event;
   memberProfilePercent: number;
   posts: Post[];

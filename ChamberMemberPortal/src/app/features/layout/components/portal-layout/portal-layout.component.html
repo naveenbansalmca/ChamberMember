@@ -13,6 +13,7 @@
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: tab.path === '/' }"
     >
+    <i [ngClass]="tab.icon"></i>
       {{ tab.label }}
     </a>
   </div>

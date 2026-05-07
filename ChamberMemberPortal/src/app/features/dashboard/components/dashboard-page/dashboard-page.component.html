@@ -68,7 +68,17 @@
     <section class="side-card">
       <h3>QUICK LINKS</h3>
       <ul class="quick-links">
-        <li *ngFor="let quickLink of dashboard.quickLinks">{{ quickLink }}</li>
+
+
+        <li *ngFor="let quickLink of dashboard.quickLinks">
+          <a [routerLink]="quickLink.path" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: quickLink.path === '/' }">
+            <i [ngClass]="quickLink.icon"></i>
+            {{ quickLink.label }}
+          </a>
+
+
+
       </ul>
     </section>
   </aside>
