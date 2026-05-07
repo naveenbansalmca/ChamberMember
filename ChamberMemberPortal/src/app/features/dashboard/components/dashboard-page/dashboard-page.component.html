@@ -1,0 +1,75 @@
+<div class="dashboard-content">
+  <section class="feed-column">
+    <section class="welcome-card">
+      <h2>Welcome to {{ dashboard.chamberName }}</h2>
+      <p>{{ dashboard.welcomeText }}</p>
+      <p>
+        Whether at work, at home, or traveling, anywhere that you have access to the internet you will be able to edit
+        your information by logging into the ChamberMaster website.
+      </p>
+    </section>
+
+    <section class="post-box">
+      <button>Text</button>
+      <button>Link</button>
+      <button>Photo</button>
+      <button>Video</button>
+      <textarea placeholder="Post expert advice, tips or just something from your day..."></textarea>
+      <div class="post-actions">
+        <button class="primary">POST</button>
+      </div>
+    </section>
+
+    <section class="feed-list">
+      <div class="feed-toolbar">
+        <strong>All</strong>
+        <span>Favorites</span>
+        <span class="filter">Filter</span>
+      </div>
+      <article *ngFor="let post of dashboard.posts">
+        <h4>{{ post.author }}</h4>
+        <p class="meta">{{ post.company }}</p>
+        <p>{{ post.message }}</p>
+        <p class="meta">{{ post.time }} · Like · Comment · {{ post.likes }}</p>
+      </article>
+      <p class="load-more">... Load more</p>
+    </section>
+  </section>
+
+  <aside class="right-column">
+    <section class="side-card">
+      <h3>UPCOMING EVENTS</h3>
+      <div class="event-date">
+        <div>{{ dashboard.upcomingEvent.month }}</div>
+        <div class="day">{{ dashboard.upcomingEvent.day }}</div>
+        <div>{{ dashboard.upcomingEvent.year }}</div>
+      </div>
+      <p class="event-title">{{ dashboard.upcomingEvent.title }}</p>
+      <p>{{ dashboard.upcomingEvent.subtitle }}</p>
+      <p>{{ dashboard.upcomingEvent.details }}</p>
+      <button class="side-action">REGISTER NOW</button>
+    </section>
+
+    <section class="side-card">
+      <h3>MEMBER PROFILE</h3>
+      <p>Your Company Profile is {{ dashboard.memberProfilePercent }}%</p>
+      <div class="progress">
+        <span [style.width.%]="dashboard.memberProfilePercent"></span>
+      </div>
+      <button class="side-action">UPDATE PROFILE</button>
+    </section>
+
+    <section class="side-card">
+      <h3>REFER A BUSINESS</h3>
+      <p>Refer others to the Pinellas Park/Gateway Chamber of Commerce.</p>
+      <button class="side-action">REFER NOW</button>
+    </section>
+
+    <section class="side-card">
+      <h3>QUICK LINKS</h3>
+      <ul class="quick-links">
+        <li *ngFor="let quickLink of dashboard.quickLinks">{{ quickLink }}</li>
+      </ul>
+    </section>
+  </aside>
+</div>

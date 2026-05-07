@@ -1,0 +1,9 @@
+<section class="menu-card">
+  <h3>SHORTCUTS</h3>
+  <ul>
+    <li *ngFor="let item of items">
+      <i [ngClass]="item.icon"></i>
+      <span>{{ item.label }}</span>
+    </li>
+  </ul>
+</section>

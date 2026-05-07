@@ -1,0 +1,37 @@
+<div class="dashboard-shell">
+  <app-dashboard-header
+    [chamberName]="dashboard.chamberName"
+    [memberName]="dashboard.memberName"
+    [memberLocation]="dashboard.memberLocation"
+  />
+
+  <nav class="top-tabs">
+    <div style="display: flex; gap: 1.6rem;width: 729px;">
+    <a
+      *ngFor="let tab of topNav"
+      [routerLink]="tab.path"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: tab.path === '/' }"
+    >
+      {{ tab.label }}
+    </a>
+  </div>
+  </nav>
+
+  <main class="portal-main">
+    <aside class="left-column">
+      <app-dashboard-menu [items]="dashboard.menuItems" />
+      <app-hot-links [links]="dashboard.hotLinks" />
+      <section class="ad-card">
+        <p class="ad-title">memberplus</p>
+        <p>Free app that provides instant access to your chamber or association.</p>
+      </section>
+    </aside>
+
+    <section class="content-column">
+      <router-outlet />
+    </section>
+  </main>
+
+  <app-dashboard-footer />
+</div>

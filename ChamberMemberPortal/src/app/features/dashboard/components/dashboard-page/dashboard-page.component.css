@@ -1,0 +1,195 @@
+.dashboard-content {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 300px;
+  align-items: start;
+}
+
+.welcome-card,
+.post-box,
+.feed-list article,
+.side-card {
+  background: #fff;
+  border: 1px solid #d9dee8;
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+.welcome-card h2 {
+  margin-top: 0;
+  color: #15457f;
+  font-size: 1.75rem;
+}
+
+.feed-column {
+  width: 100%;
+}
+
+.post-box {
+  margin-top: 1rem;
+}
+
+.post-box button {
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 0;
+  background: #edf1f8;
+  padding: 0.4rem 0.7rem;
+  border-radius: 4px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 88px;
+  margin-top: 0.7rem;
+  border: 1px solid #d5dde9;
+  border-radius: 4px;
+  padding: 0.65rem;
+  resize: vertical;
+}
+
+.post-actions {
+  margin-top: 0.7rem;
+  text-align: right;
+}
+
+.post-actions .primary {
+  background: #0c3f80;
+  color: #fff;
+}
+
+.feed-list {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.feed-toolbar {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-size: 0.86rem;
+}
+
+.feed-toolbar .filter {
+  margin-left: auto;
+}
+
+.feed-list h4 {
+  margin: 0;
+  color: #15457f;
+}
+
+.meta {
+  color: #6a7384;
+  font-size: 0.8rem;
+}
+
+.side-card h3 {
+  margin: -1rem -1rem 1rem -1rem;
+  background: #0c3f80;
+  color: #fff;
+  padding: 0.7rem 1rem;
+  border-radius: 6px 6px 0 0;
+  font-size: 0.88rem;
+}
+
+.side-card + .side-card {
+  margin-top: 1rem;
+}
+
+.event-date {
+  display: grid;
+  justify-items: center;
+  width: 70px;
+  border: 1px solid #d5dde9;
+  border-radius: 4px;
+  padding: 0.3rem;
+}
+
+.event-date .day {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.event-title {
+  margin-top: 0.8rem;
+  color: #1f4578;
+  font-weight: 600;
+}
+
+.side-card ul {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.quick-links {
+  list-style: none;
+  padding: 0;
+}
+
+.quick-links li {
+  padding: 0.6rem 0;
+  border-top: 1px solid #edf0f6;
+  font-size: 0.9rem;
+}
+
+.progress {
+  height: 10px;
+  background: #e3e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0.7rem 0 0.9rem;
+}
+
+.progress span {
+  display: block;
+  height: 100%;
+  background: #0f427e;
+}
+
+.side-action {
+  width: 100%;
+  border: 1px solid #0f427e;
+  background: #0f427e;
+  color: #fff;
+  border-radius: 3px;
+  padding: 0.55rem 0.6rem;
+  font-size: 0.8rem;
+}
+
+.load-more {
+  text-align: center;
+  font-size: 0.82rem;
+  color: #4f5d73;
+}
+
+@media (max-width: 1100px) {
+  .dashboard-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .welcome-card h2 {
+    font-size: 1.3rem;
+  }
+
+  .feed-toolbar {
+    flex-wrap: wrap;
+    gap: 0.55rem;
+  }
+
+  .feed-toolbar .filter {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-card,
+  .post-box,
+  .feed-list article,
+  .side-card {
+    padding: 0.8rem;
+  }
+}
