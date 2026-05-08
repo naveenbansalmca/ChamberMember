@@ -1,6 +1,205 @@
-.blank-content {
-    min-height: 70vh;
+.events-page {
     background: #fff;
-    border: 1px solid #d9dee8;
+    border: 1px solid #d9e0ec;
     border-radius: 6px;
+    overflow: hidden;
+}
+
+.events-title-bar {
+    background: #0f3f7f;
+    color: #fff;
+    padding: 0.72rem 1rem;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.events-panel {
+    padding: 0.8rem;
+}
+
+.panel-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+    border-bottom: 1px solid #e2e8f2;
+    padding-bottom: 0.65rem;
+    margin-bottom: 0.2rem;
+}
+
+.toolbar-left {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.results,
+.toolbar-left label {
+    font-size: 0.75rem;
+    color: #41506b;
+}
+
+.toolbar-left select {
+    margin-left: 0.35rem;
+    border: 1px solid #d5deea;
+    border-radius: 3px;
+    min-height: 26px;
+    font-size: 0.72rem;
+}
+
+.toolbar-actions {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.toolbar-actions button,
+.event-meta button {
+    border: 1px solid #d2dbea;
+    border-radius: 3px;
+    background: #f8fafd;
+    color: #334564;
+    font-size: 0.7rem;
+    padding: 0.32rem 0.62rem;
+    cursor: pointer;
+}
+
+.toolbar-actions button.active,
+.event-meta button.active {
+    background: #e8f0fb;
+    color: #113f80;
+    border-color: #bfd0ea;
+}
+
+.events-table {
+    width: 100%;
+    background: #fff;
+}
+
+.events-table tr {
+    border-bottom: 1px solid #edf1f7;
+}
+
+.events-table td {
+    padding: 0.8rem 0.2rem;
+    vertical-align: top;
+}
+
+.events-table td:first-child {
+    width: 86px;
+}
+
+.events-table td:last-child {
+    width: 170px;
+}
+
+.date-block {
+    text-align: center;
+    border-right: 1px solid #ecf0f6;
+    color: #30507f;
+}
+
+.date-block span {
+    display: block;
+}
+
+.date-block .month {
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+}
+
+.date-block .day {
+    font-size: 1.85rem;
+    line-height: 1.1;
+    font-weight: 700;
+    color: #1d355e;
+}
+
+.date-block .weekday {
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+.event-info h4 {
+    margin: 0 0 0.25rem;
+    color: #2a4269;
+    font-size: 0.95rem;
+}
+
+.event-info p {
+    margin: 0.15rem 0;
+    font-size: 0.76rem;
+    color: #4b5b76;
+    line-height: 1.45;
+}
+
+.event-info .time {
+    font-weight: 700;
+    color: #3c5072;
+}
+
+.event-meta {
+    text-align: right;
+}
+
+.event-meta .type {
+    margin: 0 0 0.25rem;
+    font-size: 0.73rem;
+    color: #3c4f72;
+}
+
+.event-meta ul {
+    list-style: none;
+    margin: 0 0 0.45rem;
+    padding: 0;
+}
+
+.event-meta li {
+    font-size: 0.68rem;
+    color: #5f6e87;
+    margin-bottom: 0.15rem;
+}
+
+:host ::ng-deep .mat-mdc-paginator {
+    border-top: 1px solid #edf1f7;
+    background: #fff;
+}
+
+:host ::ng-deep .mat-mdc-paginator-page-size .mat-mdc-form-field-infix {
+    min-height: 26px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+:host ::ng-deep .mat-mdc-paginator-page-size .mat-mdc-text-field-wrapper {
+    height: 25px;
+    padding: 0px 10px;
+    width: 60px;
+}
+
+:host ::ng-deep .mat-mdc-paginator-page-size .mat-mdc-select-trigger {
+    height: 24px;
+    align-items: center;
+}
+
+:host ::ng-deep .mat-mdc-paginator-page-size .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+}
+
+@media (max-width: 1000px) {
+    .panel-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .events-table td:first-child {
+        width: 70px;
+    }
+
+    .events-table td:last-child {
+        width: auto;
+    }
+
+    .event-meta {
+        text-align: left;
+    }
 }

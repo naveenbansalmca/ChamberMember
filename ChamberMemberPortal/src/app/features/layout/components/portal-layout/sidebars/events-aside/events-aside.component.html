@@ -1,6 +1,38 @@
 <aside class="left-column">
-  <section class="side-card">
-    <h3>Events Sidebar</h3>
-    <p>Design this sidebar independently for the Events page.</p>
+  <section class="events-filter-card">
+    <header class="card-header">
+      <span class="icon">▦</span>
+      <h3>Events</h3>
+    </header>
+
+    <ul class="quick-action-list">
+      <li *ngFor="let action of quickActions">{{ action }}</li>
+    </ul>
+
+    <section class="filters">
+      <h4>Narrow results by</h4>
+
+      <label>Keyword</label>
+      <div class="input-wrap">
+        <input type="text" placeholder="Search events..." />
+      </div>
+
+      <label>Category</label>
+      <select>
+        <option>All Categories</option>
+      </select>
+
+      <label>Month</label>
+      <select>
+        <option>All Months</option>
+      </select>
+
+      <label>Date Range</label>
+      <div class="input-wrap">
+        <input type="text" placeholder="Select date range" />
+      </div>
+
+      <button class="reset-btn">Reset Filters</button>
+    </section>
   </section>
 </aside>
