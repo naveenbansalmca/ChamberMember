@@ -2,13 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { DASHBOARD_DATA } from '../../data/dashboard.data';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { DashboardMenuComponent } from '../dashboard-menu/dashboard-menu.component';
-import { HotLinksComponent } from '../hot-links/hot-links.component';
+
 
 @Component({
   selector: 'app-dashboard-page',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive, DashboardMenuComponent, HotLinksComponent],
+  imports: [CommonModule],
   templateUrl: './dashboard-page.component.html',
   styleUrl: './dashboard-page.component.css'
 })

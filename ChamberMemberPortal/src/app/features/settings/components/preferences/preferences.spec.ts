@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EventsComponent } from './events';
+import { Preferences } from './preferences';
 
-describe('Events', () => {
-  let component: EventsComponent;
-  let fixture: ComponentFixture<EventsComponent>;
+describe('Preferences', () => {
+  let component: Preferences;
+  let fixture: ComponentFixture<Preferences>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EventsComponent]
+      imports: [Preferences]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(EventsComponent);
+    fixture = TestBed.createComponent(Preferences);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

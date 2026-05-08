@@ -1,6 +1,20 @@
 <aside class="left-column">
-  <section class="side-card">
-    <h3>Settings Sidebar</h3>
-    <p>Design this sidebar independently for the Settings page.</p>
+  <section class="account-menu">
+    <header>ACCOUNT SETTINGS</header>
+
+    
+    <ul>
+      <li *ngFor="let item of personalItems"><a [routerLink]="item.path">{{ item.label }} </a></li>
+    </ul>
+
+    <div class="menu-group collapsible">Company</div>
+    <div class="menu-group collapsible">Billing</div>
+  </section>
+
+  <section class="help-card">
+    <div class="icon">🎧</div>
+    <h4>Need Help?</h4>
+    <p>If you have any questions or need assistance, our support team is here to help.</p>
+    <button>Contact Support</button>
   </section>
 </aside>
