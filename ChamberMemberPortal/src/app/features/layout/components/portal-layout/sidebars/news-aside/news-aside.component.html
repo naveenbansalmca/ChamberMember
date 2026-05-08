@@ -1,6 +1,30 @@
 <aside class="left-column">
-  <section class="side-card">
-    <h3>News Sidebar</h3>
-    <p>Design this sidebar independently for the News page.</p>
+  <section class="community-menu">
+    <header>
+      <span>COMMUNITY</span>
+    </header>
+
+    <ul>
+      <li *ngFor="let item of menuItems; let i = index">
+        
+
+        <a [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: item.path === '/' }">
+          <i [ngClass]="item.icon"></i>
+          {{ item.label }}
+        </a>
+
+        
+      
+      </li>
+    </ul>
+  </section>
+
+  <section class="share-card">
+    <div class="icon-circle">
+      <i class="bi bi-megaphone-fill"></i>
+    </div>
+    <h4>Have something to share?</h4>
+    <p>Post your news, deals, or opportunities with the Chamber community.</p>
+    <button><i class="bi bi-send-fill"></i> Get Started</button>
   </section>
 </aside>

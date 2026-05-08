@@ -11,7 +11,6 @@ export interface DashboardModel {
   topTabs: MenuItem[];
   menuItems: MenuItem[];
   hotLinks: HotLink[];
-  quickLinks: MenuItem[];
   upcomingEvent: Event;
   memberProfilePercent: number;
   posts: Post[];

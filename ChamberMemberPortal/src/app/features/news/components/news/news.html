@@ -1,1 +1,24 @@
-<section class="blank-content">News</section>
+<section class="community-page">
+  <header class="community-header">
+    <h2>Community Content</h2>
+    <p>Stay connected with deals, opportunities, and updates from the Chamber community.</p>
+  </header>
+
+  <section class="community-list">
+    <article class="community-card" *ngFor="let card of cards">
+      <div class="icon-pill" [ngClass]="card.tone">
+        <i [class]="card.iconClass"></i>
+      </div>
+
+      <div class="content">
+        <h3>{{ card.title }}</h3>
+        <p>{{ card.description }}</p>
+      </div>
+
+      <div class="actions">
+        <span class="count" [ngClass]="card.tone">{{ card.countText }}</span>
+        <button>View All <i class="bi bi-arrow-right"></i></button>
+      </div>
+    </article>
+  </section>
+</section>

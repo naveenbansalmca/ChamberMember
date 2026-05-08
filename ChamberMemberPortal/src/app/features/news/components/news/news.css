@@ -1,6 +1,158 @@
-.blank-content {
-    min-height: 70vh;
-    background: #fff;
-    border: 1px solid #d9dee8;
-    border-radius: 6px;
+.community-page {
+  background: #fff;
+  border: 1px solid #d9e0ec;
+  border-radius: 6px;
+  padding: 0.95rem;
+}
+
+.community-header {
+  margin-bottom: 0.85rem;
+}
+
+.community-header h2 {
+  margin: 0;
+  color: #213754;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.community-header p {
+  margin: 0.24rem 0 0;
+  color: #5b6b84;
+  font-size: 0.86rem;
+}
+
+.community-list {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.community-card {
+  border: 1px solid #e6ecf4;
+  border-radius: 8px;
+  padding: 0.72rem;
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  align-items: center;
+  gap: 0.72rem;
+}
+
+.icon-pill {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+}
+
+.icon-pill.pink {
+  background: #fff0f2;
+  color: #de4b6d;
+}
+
+.icon-pill.green {
+  background: #ecfbef;
+  color: #31a765;
+}
+
+.icon-pill.blue {
+  background: #eef5ff;
+  color: #2b66c9;
+}
+
+.icon-pill.purple {
+  background: #f4efff;
+  color: #7a47c2;
+}
+
+.icon-pill.orange {
+  background: #fff6ea;
+  color: #d58a22;
+}
+
+.icon-pill.cyan {
+  background: #edfbfe;
+  color: #2f9db3;
+}
+
+.content h3 {
+  margin: 0 0 0.2rem;
+  color: #233a58;
+  font-size: 1.03rem;
+}
+
+.content p {
+  margin: 0;
+  color: #556682;
+  font-size: 0.8rem;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.count {
+  border-radius: 999px;
+  padding: 0.22rem 0.58rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.count.pink {
+  background: #fff0f2;
+  color: #cc4564;
+}
+
+.count.green {
+  background: #ecfbef;
+  color: #2f945a;
+}
+
+.count.blue {
+  background: #eef5ff;
+  color: #315dad;
+}
+
+.count.purple {
+  background: #f4efff;
+  color: #6d4cab;
+}
+
+.count.orange {
+  background: #fff6ea;
+  color: #bf842f;
+}
+
+.count.cyan {
+  background: #edfbfe;
+  color: #31889f;
+}
+
+.actions button {
+  background: #0f3f7f;
+  border: 0;
+  color: #fff;
+  border-radius: 6px;
+  padding: 0.42rem 0.74rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.actions button i {
+  margin-left: 0.3rem;
+}
+
+@media (max-width: 900px) {
+  .community-card {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .actions {
+    justify-content: flex-start;
+  }
 }

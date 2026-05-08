@@ -1,6 +1,88 @@
-.side-card {
+.community-menu {
   background: #fff;
-  border: 1px solid #dce3ee;
+  border: 1px solid #d9e0eb;
   border-radius: 6px;
-  padding: 1rem;
+  overflow: hidden;
+  margin-bottom: 0.9rem;
+}
+
+.community-menu header {
+  background: #0f3f7f;
+  color: #fff;
+  padding: 0.72rem 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.community-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.community-menu li {
+  padding: 0.72rem 0.9rem;
+  font-size: 0.79rem;
+  color: #27354f;
+  border-bottom: 1px solid #ecf0f6;
+  cursor: pointer;
+}
+
+.community-menu li.active {
+  background: #f3f7fc;
+  border-left: 3px solid #1671d9;
+  padding-left: 0.7rem;
+  font-weight: 600;
+}
+
+.community-menu li:last-child {
+  border-bottom: 0;
+}
+
+.share-card {
+  background: #fff;
+  border: 1px solid #d9e0eb;
+  border-radius: 6px;
+  padding: 1.1rem 0.95rem;
+  text-align: center;
+}
+
+.icon-circle {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 0.55rem;
+  border-radius: 50%;
+  background: #e9f2ff;
+  color: #1667c7;
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+}
+
+.share-card h4 {
+  margin: 0.1rem 0 0.42rem;
+  color: #263954;
+  font-size: 1.06rem;
+}
+
+.share-card p {
+  margin: 0 0 0.85rem;
+  color: #556582;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.share-card button {
+  border: 0;
+  background: #0f3f7f;
+  color: #fff;
+  border-radius: 4px;
+  padding: 0.45rem 0.8rem;
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.share-card button i {
+  margin-right: 0.35rem;
 }
