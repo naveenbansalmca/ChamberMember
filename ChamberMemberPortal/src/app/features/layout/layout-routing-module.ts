@@ -21,7 +21,15 @@ const routes: Routes = [
       {
         path: 'account',
         loadChildren: () => import('../settings/settings-module').then(m => m.SettingsModule)
-      }
+      },
+      {
+        path: 'news',
+        loadChildren: () => import('../news/news-module').then(m => m.NewsModule)
+      },
+      {
+        path: 'resources',
+        loadChildren: () => import('../resources/resources-module').then(m => m.ResourcesModule)
+      },
 
     ]
   }

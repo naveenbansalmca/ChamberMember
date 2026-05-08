@@ -11,12 +11,12 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class SettingsAsideComponent {
   readonly personalItems = [
-    { label: 'Personal', path: './settings' },
-    { label: 'Profile', path: './settings/profile' },
-    { label: 'Username/Password', path: './settings/change-password' },
-    { label: 'Photo', path: './settings/photo' },
-    { label: 'Groups/Interests', path: './settings/groups-interests' },
-    { label: 'Display Preferences', path: './settings/display-preferences' }
+    { label: 'Personal', path: './account' },
+    { label: 'Profile', path: './account/profile' },
+    { label: 'Username/Password', path: './account/change-password' },
+    { label: 'Photo', path: './account/photo' },
+    { label: 'Groups/Interests', path: './account/groups-interests' },
+    { label: 'Display Preferences', path: './account/display-preferences' }
 
 
   ];
