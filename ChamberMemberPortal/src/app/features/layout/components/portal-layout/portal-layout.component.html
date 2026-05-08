@@ -1,33 +1,20 @@
 <div class="dashboard-shell">
-  <app-dashboard-header
-    [chamberName]="dashboard.chamberName"
-    [memberName]="dashboard.memberName"
-    [memberLocation]="dashboard.memberLocation"
-  />
+  <app-dashboard-header [chamberName]="dashboard.chamberName" [memberName]="dashboard.memberName"
+    [memberLocation]="dashboard.memberLocation" />
 
-  <nav class="top-tabs">
-    <div style="display: flex; gap: 1.6rem;width: 729px;">
-    <a
-      *ngFor="let tab of topNav"
-      [routerLink]="tab.path"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: tab.path === '/' }"
-    >
-    <i [ngClass]="tab.icon"></i>
-      {{ tab.label }}
-    </a>
-  </div>
-  </nav>
+
+  <app-top-menu></app-top-menu>
+
 
   <main class="portal-main">
-    <aside class="left-column">
-      <app-dashboard-menu [items]="dashboard.menuItems" />
-      <app-hot-links [links]="dashboard.hotLinks" />
-      <section class="ad-card">
-        <p class="ad-title">memberplus</p>
-        <p>Free app that provides instant access to your chamber or association.</p>
-      </section>
-    </aside>
+    <ng-container [ngSwitch]="currentSidebarType">
+      <app-dashboard-aside *ngSwitchCase="'dashboard'"></app-dashboard-aside>
+      <app-events-aside *ngSwitchCase="'events'"></app-events-aside>
+      <app-resources-aside *ngSwitchCase="'resources'"></app-resources-aside>
+      <app-news-aside *ngSwitchCase="'news'"></app-news-aside>
+      <app-settings-aside *ngSwitchCase="'settings'"></app-settings-aside>
+      <app-dashboard-aside *ngSwitchDefault></app-dashboard-aside>
+    </ng-container>
 
     <section class="content-column">
       <router-outlet />

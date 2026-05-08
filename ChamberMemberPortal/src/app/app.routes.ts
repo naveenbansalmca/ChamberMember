@@ -12,11 +12,11 @@ export const routes: Routes = [
     path: '',
     component: PortalLayoutComponent,
     children: [
-      { path: '', component: DashboardPageComponent },
-      { path: 'events', component: EventsComponent },
-      { path: 'resources', component: ResourcesComponent },
-      { path: 'news', component: NewsComponent },
-      { path: 'settings', component: SettingComponent }
+      { path: '', component: DashboardPageComponent, data: { sidebarType: 'dashboard' } },
+      { path: 'events', component: EventsComponent, data: { sidebarType: 'events' } },
+      { path: 'resources', component: ResourcesComponent, data: { sidebarType: 'resources' } },
+      { path: 'news', component: NewsComponent, data: { sidebarType: 'news' } },
+      { path: 'settings', component: SettingComponent, data: { sidebarType: 'settings' } }
     ]
   }
 ];

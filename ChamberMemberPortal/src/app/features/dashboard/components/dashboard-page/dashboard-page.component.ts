@@ -21,7 +21,7 @@ export class DashboardPageComponent {
 
 
   FilterPostByFavourite(params: number) {
-    debugger;
+    
     if (params == 1) {
       this.PostActiveTab = 2;
       this.displayPost = this.dashboard.posts.filter(a => a.isfavourite);

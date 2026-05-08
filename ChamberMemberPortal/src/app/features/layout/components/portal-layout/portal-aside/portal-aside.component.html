@@ -1,0 +1,9 @@
+<aside class="left-column" *ngIf="content">
+  <app-dashboard-menu [items]="content.menuItems" />
+  <app-hot-links [links]="content.hotLinks" />
+
+  <section class="ad-card">
+    <p class="ad-title">{{ content.adTitle }}</p>
+    <p>{{ content.adText }}</p>
+  </section>
+</aside>
