@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { DASHBOARD_DATA } from '../../../dashboard/data/dashboard.data';
-import { DashboardFooterComponent } from '../../../dashboard/components/dashboard-footer/dashboard-footer.component';
-import { DashboardHeaderComponent } from '../../../dashboard/components/dashboard-header/dashboard-header.component';
+import { DashboardFooterComponent } from './dashboard-footer/dashboard-footer.component';
+import { DashboardHeaderComponent } from './dashboard-header/dashboard-header.component';
 import { DashboardMenuComponent } from '../../../dashboard/components/dashboard-menu/dashboard-menu.component';
 import { HotLinksComponent } from '../../../dashboard/components/hot-links/hot-links.component';
 
