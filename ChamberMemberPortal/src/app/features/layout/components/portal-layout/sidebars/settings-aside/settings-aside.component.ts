@@ -11,7 +11,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class SettingsAsideComponent {
   readonly personalItems = [
-    { label: 'Personal', path: './account' },
+    { label: 'Personal', path: './account/personal' },
     { label: 'Profile', path: './account/profile' },
     { label: 'Username/Password', path: './account/change-password' },
     { label: 'Photo', path: './account/photo' },
