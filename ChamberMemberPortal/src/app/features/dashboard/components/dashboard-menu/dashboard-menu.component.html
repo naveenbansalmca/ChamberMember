@@ -2,14 +2,10 @@
   <h3>SHORTCUTS</h3>
   <ul>
     <li *ngFor="let item of items">
-
       <a [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: item.path === '/' }">
         <i [ngClass]="item.icon"></i>
         {{ item.label }}
       </a>
-
-
-
     </li>
   </ul>
 </section>

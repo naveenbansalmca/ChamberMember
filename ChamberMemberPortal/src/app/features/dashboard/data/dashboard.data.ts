@@ -7,31 +7,35 @@ export const DASHBOARD_DATA: DashboardModel = {
   welcomeText:
     'ChamberMaster is your direct connection to the Pinellas Park/Gateway Chamber of Commerce. As a member of the Pinellas Park/Gateway Chamber of Commerce you have the opportunity to market your business to consumers visiting pinellaspark.com by enhancing your information home page with pictures and text, add an also post hot deals, job openings and events, add keywords to help consumers find you when they run searches, and run reports to see hit statistics for your home page and other advertised items.',
   topTabs: [
-    { label: 'Home', icon: 'bi bi-person',path: '/' },
-    { label: 'Events', icon: 'bi bi-calendar',path: '/events' },
-    { label: 'Resources', icon: 'bi bi-folder',path: '/resources' },
-    { label: 'News', icon: 'bi bi-newspaper',path: '/news' },
-    { label: 'Settings', icon: 'bi bi-gear',path: '/settings' }
+    { label: 'Home', icon: 'bi bi-person', path: '/' },
+    { label: 'Events', icon: 'bi bi-calendar', path: '/events' },
+    { label: 'Resources', icon: 'bi bi-folder', path: '/resources' },
+    { label: 'News', icon: 'bi bi-newspaper', path: '/news' },
+    { label: 'Settings', icon: 'bi bi-gear', path: '/settings' }
   ],
 
   menuItems: [
-    { label: 'Personal Information', icon: 'bi bi-person',path: '/personal-information' },
-    { label: 'Company Information', icon: 'bi bi-building',path: '/company-information' },
-    { label: 'Hot Deals', icon: 'bi bi-gear',path: '/hot-deals' },
-    { label: 'Member To Member Deals', icon: 'fa-solid fa-handshake',path: '/member-to-member-deals' },
-    { label: 'News Releases', icon: 'bi bi-newspaper',path: '/news-releases' },
-    { label: 'Job Postings', icon: 'fa fa-briefcase',path: '/job-postings' },
-    { label: 'MarketSpace', icon: 'bi bi-shop',path: '/marketspace' },
-    { label: 'Request for Proposals', icon: 'fa fa-file-text',path: '/request-for-proposals' }
+    { label: 'Personal Information', icon: 'bi bi-person', path: '/personal-information' },
+    { label: 'Company Information', icon: 'bi bi-building', path: '/company-information' },
+    { label: 'Hot Deals', icon: 'bi bi-gear', path: '/hot-deals' },
+    { label: 'Member To Member Deals', icon: 'fa-solid fa-handshake', path: '/member-to-member-deals' },
+    { label: 'News Releases', icon: 'bi bi-newspaper', path: '/news-releases' },
+    { label: 'Job Postings', icon: 'fa fa-briefcase', path: '/job-postings' },
+    { label: 'MarketSpace', icon: 'bi bi-shop', path: '/marketspace' },
+    { label: 'Request for Proposals', icon: 'fa fa-file-text', path: '/request-for-proposals' }
   ],
-    
-  hotLinks: [{ label: 'Chamber Forums' }, { label: 'Additional Links' }, { label: 'Additional Links - 2' }],
+
+  hotLinks: [
+    { label: 'Chamber Forums' },
+    { label: 'Additional Links' },
+    { label: 'Additional Links - 2' }
+  ],
   quickLinks: [
-    { label: 'Hot Deals', icon: 'bi bi-gear',path: '/hot-deals' },
-    { label: 'Job Postings', icon: 'fa fa-briefcase',path: '/job-postings' },
-    { label: 'MarketSpace', icon: 'bi bi-shop',path: '/marketspace' },
-    { label: 'News Releases', icon: 'bi bi-newspaper',path: '/news-releases' },
-    { label: 'Request for Proposals', icon: 'fa fa-file-text',path: '/request-for-proposals' }
+    { label: 'Hot Deals', icon: 'bi bi-gear', path: '/hot-deals' },
+    { label: 'Job Postings', icon: 'fa fa-briefcase', path: '/job-postings' },
+    { label: 'MarketSpace', icon: 'bi bi-shop', path: '/marketspace' },
+    { label: 'News Releases', icon: 'bi bi-newspaper', path: '/news-releases' },
+    { label: 'Request for Proposals', icon: 'fa fa-file-text', path: '/request-for-proposals' }
   ],
   upcomingEvent: {
     month: 'May',
@@ -42,6 +46,7 @@ export const DASHBOARD_DATA: DashboardModel = {
     details: 'Meeting The Ambassadors Committee'
   },
   memberProfilePercent: 25,
+
   posts: [
     {
       author: 'Melissa Alama',
@@ -49,7 +54,10 @@ export const DASHBOARD_DATA: DashboardModel = {
       message: 'Pinellas Park/Gateway Chamber of Commerce has changed their information.',
       time: 'Monday, April 21, 2026 7:26 PM',
       likes: 0,
-      comments: 1
+      comments: 1,
+      typeId: 1,
+      isfavourite: true
+
     },
     {
       author: 'Paul Haskins AAMS, CEPA',
@@ -57,7 +65,9 @@ export const DASHBOARD_DATA: DashboardModel = {
       message: 'Four reasons a 529 plan might make sense for your family.',
       time: 'Tuesday, April 21, 2026 2:41 PM',
       likes: 0,
-      comments: 0
+      comments: 0,
+      typeId: 1,
+      isfavourite: true
     },
     {
       author: 'Paul Haskins AAMS, CEPA',
@@ -65,7 +75,9 @@ export const DASHBOARD_DATA: DashboardModel = {
       message: 'Help your graduate use credit and debit cards wisely.',
       time: 'Tuesday, April 21, 2026 2:41 PM',
       likes: 0,
-      comments: 0
+      comments: 0,
+      typeId: 2,
+      isfavourite: false
     },
     {
       author: 'Paul Haskins AAMS, CEPA',
@@ -73,7 +85,9 @@ export const DASHBOARD_DATA: DashboardModel = {
       message: 'Ten financial steps to take before and after your wedding day.',
       time: 'Tuesday, April 21, 2026 2:41 PM',
       likes: 0,
-      comments: 0
+      comments: 0,
+      typeId: 1,
+      isfavourite: true
     },
     {
       author: 'Paul Haskins AAMS, CEPA',
@@ -81,7 +95,9 @@ export const DASHBOARD_DATA: DashboardModel = {
       message: 'Saving for Retirement: Are You Guessing or Planning?',
       time: 'Tuesday, April 21, 2026 2:41 PM',
       likes: 0,
-      comments: 0
+      comments: 0,
+      typeId: 2,
+      isfavourite: false
     }
   ]
 };

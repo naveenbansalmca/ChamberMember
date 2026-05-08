@@ -94,7 +94,7 @@ textarea {
   font-size: 0.88rem;
 }
 
-.side-card + .side-card {
+.side-card+.side-card {
   margin-top: 1rem;
 }
 
@@ -186,6 +186,7 @@ textarea {
 }
 
 @media (max-width: 480px) {
+
   .welcome-card,
   .post-box,
   .feed-list article,

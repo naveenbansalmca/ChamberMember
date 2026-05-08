@@ -22,11 +22,13 @@
 
     <section class="feed-list">
       <div class="feed-toolbar">
-        <strong>All</strong>
-        <span>Favorites</span>
+        <button (click)="FilterPostByFavourite(0)" class="cursor-pointer"
+          [ngClass]="PostActiveTab==1 ? 'tabactive' : ''">All</button>
+        <button (click)="FilterPostByFavourite(1)" class="cursor-pointer"
+          [ngClass]="PostActiveTab==2 ? 'tabactive' : ''">Favorites</button>
         <span class="filter">Filter</span>
       </div>
-      <article *ngFor="let post of dashboard.posts">
+      <article *ngFor="let post of displayPost">
         <h4>{{ post.author }}</h4>
         <p class="meta">{{ post.company }}</p>
         <p>{{ post.message }}</p>

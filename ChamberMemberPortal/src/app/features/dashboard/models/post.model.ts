@@ -5,4 +5,6 @@ export interface Post {
   time: string;
   likes: number;
   comments: number;
+  typeId: number;
+  isfavourite: boolean;
 }
