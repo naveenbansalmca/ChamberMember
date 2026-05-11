@@ -1,15 +1,37 @@
 <aside class="left-column">
   <section class="account-menu">
     <header>ACCOUNT SETTINGS</header>
-    <ul>
-      <li *ngFor="let item of personalItems" routerLinkActive="menu-group active-group"
-        [routerLinkActiveOptions]="{ exact: true }">
-        <a [routerLink]="item.path">{{ item.label }} </a>
-      </li>
-    </ul>
+    <div class="menu-group collapsible" (click)="SelectedButton='Personal'">Personal</div>
+    <div class="collapse-panel-body" [class.open]="SelectedButton=='Personal'">
+      <ul>
+        <li *ngFor="let item of personalItems" routerLinkActive="menu-group active-group"
+          [routerLinkActiveOptions]="{ exact: true }">
+          <a [routerLink]="item.path">{{ item.label }} </a>
+        </li>
+      </ul>
+    </div>
 
-    <div class="menu-group collapsible">Company</div>
-    <div class="menu-group collapsible">Billing</div>
+    <div class="menu-group collapsible" (click)="SelectedButton='Company'">Company</div>
+
+    <div class="collapse-panel-body" [class.open]="SelectedButton=='Company'">
+      <ul>
+        <li>
+          Compnay Menu
+        </li>
+      </ul>
+    </div>
+
+
+    <div class="menu-group collapsible" (click)="SelectedButton='Billing'">Billing</div>
+    <div class="collapse-panel-body" [class.open]="SelectedButton=='Billing'">
+      <ul>
+        <li>
+          Billing Menu
+        </li>
+      </ul>
+    </div>
+
+
   </section>
 
   <section class="help-card">

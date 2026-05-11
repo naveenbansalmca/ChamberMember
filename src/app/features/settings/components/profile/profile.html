@@ -1,1 +1,155 @@
-<p>profile works!</p>
+<form [formGroup]="settingsForm" (ngSubmit)="saveChanges()">
+    <header class="settings-header">
+      <div>
+        <h2>My Profile</h2>
+        <p>Manage your personal information and preferences.</p>
+      </div>
+  
+      <div class="header-actions">
+        <button type="button" class="btn secondary" (click)="clearChanges()">Clear Changes</button>
+        <button type="submit" class="btn primary">Save Changes</button>
+      </div>
+    </header>
+  
+    <section class="form-grid">
+      <div class="field">
+        <label>Prefix</label>
+        <select formControlName="prefix">
+          <option>Mr.</option>
+          <option>Mrs.</option>
+          <option>Ms.</option>
+          <option>Dr.</option>
+        </select>
+      </div>
+  
+      <div class="field">
+        <label>Greeting</label>
+        <select formControlName="greeting">
+          <option>Hello</option>
+          <option>Hi</option>
+          <option>Dear</option>
+        </select>
+      </div>
+  
+      <div class="field">
+        <label>First Name *</label>
+        <input type="text" formControlName="firstName" />
+      </div>
+  
+      <div class="field">
+        <label>Job Title</label>
+        <input type="text" formControlName="jobTitle" />
+      </div>
+  
+      <div class="field">
+        <label>Middle Name</label>
+        <input type="text" formControlName="middleName" />
+      </div>
+  
+      <div class="field">
+        <label>Contact Preference *</label>
+        <select formControlName="contactPreference">
+          <option>Email</option>
+          <option>Phone</option>
+          <option>SMS</option>
+        </select>
+      </div>
+  
+      <div class="field">
+        <label>Last Name *</label>
+        <input type="text" formControlName="lastName" />
+      </div>
+  
+      <div class="field">
+        <label>Phone Preference *</label>
+        <select formControlName="phonePreference">
+          <option>Work Phone</option>
+          <option>Home Phone</option>
+          <option>Cell Phone</option>
+        </select>
+      </div>
+  
+      <div class="field">
+        <label>Address Line 1 *</label>
+        <input type="text" formControlName="addressLine1" />
+      </div>
+  
+      <div class="field">
+        <label>Work Phone</label>
+        <input type="text" formControlName="workPhone" />
+      </div>
+  
+      <div class="field">
+        <label>Address Line 2</label>
+        <input type="text" formControlName="addressLine2" />
+      </div>
+  
+      <div class="field">
+        <label>Home Phone</label>
+        <input type="text" formControlName="homePhone" />
+      </div>
+  
+      <div class="field">
+        <label>City *</label>
+        <input type="text" formControlName="city" />
+      </div>
+  
+      <div class="field">
+        <label>Cell Phone</label>
+        <input type="text" formControlName="cellPhone" />
+      </div>
+  
+      <div class="field">
+        <label>State *</label>
+        <select formControlName="state">
+          <option>FL</option>
+          <option>CA</option>
+          <option>NY</option>
+        </select>
+      </div>
+  
+      <div class="field">
+        <label>Alt Phone</label>
+        <input type="text" formControlName="altPhone" />
+      </div>
+  
+      <div class="field">
+        <label>Postal Code *</label>
+        <input type="text" formControlName="postalCode" />
+      </div>
+  
+      <div class="field">
+        <label>Fax</label>
+        <input type="text" formControlName="fax" />
+      </div>
+  
+      <div class="field">
+        <label>Country</label>
+        <select formControlName="country">
+          <option>United States</option>
+          <option>Canada</option>
+        </select>
+      </div>
+  
+      <div class="field">
+        <label>Email *</label>
+        <input type="email" formControlName="email" />
+      </div>
+    </section>
+  
+    <section class="checkbox-grid">
+      <label><input type="checkbox" formControlName="repActive" /> Rep is currently ACTIVE with this member.</label>
+      <label><input type="checkbox" formControlName="primaryContact" /> Primary Contact</label>
+      <label><input type="checkbox" formControlName="billingContact" /> Billing Contact</label>
+    </section>
+  
+    <section class="bio-wrap">
+      <label>Personal Bio</label>
+      <textarea rows="5" formControlName="personalBio" placeholder="Write about yourself..."></textarea>
+    </section>
+  
+    <footer class="bottom-actions">
+      <button type="button" class="btn secondary" (click)="clearChanges()">Clear Changes</button>
+      <button type="submit" class="btn primary">Save Changes</button>
+    </footer>
+  </form>

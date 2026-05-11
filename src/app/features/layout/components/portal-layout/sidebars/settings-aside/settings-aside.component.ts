@@ -11,13 +11,15 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class SettingsAsideComponent {
   readonly personalItems = [
-    { label: 'Personal', path: './account/personal' },
+
     { label: 'Profile', path: './account/profile' },
     { label: 'Username/Password', path: './account/change-password' },
     { label: 'Photo', path: './account/photo' },
     { label: 'Groups/Interests', path: './account/groups-interests' },
     { label: 'Display Preferences', path: './account/display-preferences' }
-
-
   ];
+
+  isOpen: boolean = true;
+
+  SelectedButton:string='personal';
 }

@@ -6,15 +6,14 @@ import { Preferences } from './components/preferences/preferences';
 import { Profile } from './components/profile/profile';
 import { ChangePassword } from './components/change-password/change-password';
 import { SettingLayout } from './components/setting-layout';
-import { SettingComponent } from './components/setting/setting';
+
 
 const routes: Routes = [
 
   {
     path: '', component: SettingLayout, data: { sidebarType: 'settings' },
     children: [
-      { path: '', component: SettingComponent, data: { sidebarType: 'settings' } },
-      { path: 'personal', component: SettingComponent, data: { sidebarType: 'settings' } },
+      { path: '', component: Profile, data: { sidebarType: 'settings' } },
       { path: 'photo', component: Photo, data: { sidebarType: 'settings' } },
       { path: 'groups-interests', component: Groups, data: { sidebarType: 'settings' } },
       { path: 'display-preferences', component: Preferences, data: { sidebarType: 'settings' } },

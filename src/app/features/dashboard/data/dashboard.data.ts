@@ -12,7 +12,7 @@ export const DASHBOARD_DATA: DashboardModel = {
     { label: 'Events', icon: IconsEnum.Events, path: '/events' },
     { label: 'Resources', icon: IconsEnum.Resources, path: '/resources' },
     { label: 'News', icon: IconsEnum.NewsRelease, path: '/news' },
-    { label: 'Settings', icon: IconsEnum.Settings, path: '/account/personal' }
+    { label: 'Settings', icon: IconsEnum.Settings, path: '/account' }
   ],
 
   menuItems: [

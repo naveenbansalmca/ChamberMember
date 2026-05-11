@@ -1,160 +1,176 @@
 .account-menu {
-    background: #fff;
-    border: 1px solid #d9e0eb;
-    border-radius: 6px;
-    overflow: hidden;
-    margin-bottom: 0.9rem;
-  }
-  
-  .account-menu header {
-    background: #0f3f7f;
-    color: #fff;
-    padding: 0.75rem 0.9rem;
-    font-size: 0.78rem;
-    font-weight: 700;
-   
-  }
+  background: #fff;
+  border: 1px solid #d9e0eb;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 0.9rem;
+}
 
-  .account-menu header span{
-    text-transform: uppercase;
-  }
-  
-  .menu-group {
-    padding: 0.72rem 0.9rem;
-    border-top: 1px solid #ecf0f6;
-    color: #2d3f5d;
-    font-size: 0.8rem;
-  }
-  
-  .menu-group.active-group {
-    background: #edf4ff;
-    border-left: 3px solid #1671d9;
-    padding-left: 0.7rem;
-    font-weight: 700;
-  }
-  
-  .menu-group.collapsible {
-    font-weight: 600;
-  }
-  
-  .account-menu ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .account-menu li {
-    padding: 0.68rem 0.95rem;
-    border-top: 1px solid #ecf0f6;
-    color: #394c69;
-    font-size: 1rem;
-  }
-  
-  .help-card {
-    background: #fff;
-    border: 1px solid #d9e0eb;
-    border-radius: 6px;
-    padding: 1rem;
-    text-align: center;
-  }
-  
-  .icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: #e9f2ff;
-    display: grid;
-    place-items: center;
-    margin: 0 auto 0.55rem;
-    font-size: 1.2rem;
-  }
-  
-  .help-card h4 {
-    margin: 0.2rem 0;
-    color: #2b3f5f;
-  }
-  
-  .help-card p {
-    margin: 0.2rem 0 0.8rem;
-    color: #5e6e88;
-    font-size: 0.78rem;
-    line-height: 1.5;
-  }
-  
-  .help-card button {
-    border: 1px solid #c9d4e4;
-    background: #f6f9fe;
-    color: #2c4468;
-    border-radius: 4px;
-    padding: 0.42rem 0.75rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  
-  .filters {
-    padding: 0.8rem;
-  }
-  
-  .filters h4 {
-    margin: 0 0 0.8rem;
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: #2c3a53;
-  }
-  
-  .filters label {
-    display: block;
-    margin-bottom: 0.35rem;
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: #3c4a62;
-  }
-  
-  .filters select,
-  .input-wrap input {
-    width: 100%;
-    border: 1px solid #d7deea;
-    border-radius: 3px;
-    background: #fff;
-    min-height: 30px;
-    padding: 0 0.55rem;
-    margin-bottom: 0.62rem;
-    font-size: 0.73rem;
-    color: #4a5670;
-  }
-  
-  .reset-btn {
-    margin-top: 0.2rem;
-    border: 1px solid #c6cfde;
-    background: #f5f8fc;
-    color: #2b3f63;
-    border-radius: 4px;
-    padding: 0.4rem 0.7rem;
-    font-size: 0.72rem;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  
-  .reset-btn:hover {
-    background: #edf2f9;
-  }
-  
-  
-  .ad-card {
-    margin-top: 1rem;
-    background: #102d67;
-    color: #fff;
-    border-radius: 6px;
-    padding: 1rem;
-    font-size: 0.82rem;
-    line-height: 1.5;
-  }
-  
-  .ad-title {
-    margin-top: 0;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #f4bc44;
-  }
-  
+.account-menu header {
+  background: #0f3f7f;
+  color: #fff;
+  padding: 0.75rem 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+
+}
+
+.account-menu header span {
+  text-transform: uppercase;
+}
+
+.menu-group {
+  padding: 0.72rem 0.9rem;
+  border-top: 1px solid #ecf0f6;
+  color: #2d3f5d;
+  font-size: 0.8rem;
+}
+
+.menu-group.active-group {
+  background: #edf4ff;
+  border-left: 3px solid #1671d9;
+  padding-left: 0.7rem;
+  font-weight: 700;
+}
+
+.menu-group.collapsible {
+  font-weight: 600;
+}
+
+.account-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.account-menu li {
+  padding: 0.68rem 0.95rem;
+  border-top: 1px solid #ecf0f6;
+  color: #394c69;
+  font-size: 1rem;
+}
+
+.help-card {
+  background: #fff;
+  border: 1px solid #d9e0eb;
+  border-radius: 6px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #e9f2ff;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 0.55rem;
+  font-size: 1.2rem;
+}
+
+.help-card h4 {
+  margin: 0.2rem 0;
+  color: #2b3f5f;
+}
+
+.help-card p {
+  margin: 0.2rem 0 0.8rem;
+  color: #5e6e88;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.help-card button {
+  border: 1px solid #c9d4e4;
+  background: #f6f9fe;
+  color: #2c4468;
+  border-radius: 4px;
+  padding: 0.42rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.filters {
+  padding: 0.8rem;
+}
+
+.filters h4 {
+  margin: 0 0 0.8rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #2c3a53;
+}
+
+.filters label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #3c4a62;
+}
+
+.filters select,
+.input-wrap input {
+  width: 100%;
+  border: 1px solid #d7deea;
+  border-radius: 3px;
+  background: #fff;
+  min-height: 30px;
+  padding: 0 0.55rem;
+  margin-bottom: 0.62rem;
+  font-size: 0.73rem;
+  color: #4a5670;
+}
+
+.reset-btn {
+  margin-top: 0.2rem;
+  border: 1px solid #c6cfde;
+  background: #f5f8fc;
+  color: #2b3f63;
+  border-radius: 4px;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.reset-btn:hover {
+  background: #edf2f9;
+}
+
+
+.ad-card {
+  margin-top: 1rem;
+  background: #102d67;
+  color: #fff;
+  border-radius: 6px;
+  padding: 1rem;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.ad-title {
+  margin-top: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #f4bc44;
+}
+
+.menu-group.collapsible {
+  font-size: 19px;
+  background-color: bisque;
+  font-weight: 700;
+}
+
+
+.collapse-panel-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.8s ease;
+}
+
+.collapse-panel-body.open {
+  max-height: 300px;
+}
