@@ -13,4 +13,5 @@ export class TopMenuComponent {
 
   readonly topNav = DASHBOARD_DATA.topTabs;
 
+  
 }
