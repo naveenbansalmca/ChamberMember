@@ -1,25 +1,21 @@
 <aside class="left-column">
-  <section class="community-menu">
+  <section class="account-menu">
+    
     <header>
-      <span>COMMUNITY</span>
+      COMMUNITY
     </header>
 
     <ul>
       <li *ngFor="let item of menuItems; let i = index">
-        
-
         <a [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: item.path === '/' }">
           <i [ngClass]="item.icon"></i>
           {{ item.label }}
         </a>
-
-        
-      
       </li>
     </ul>
   </section>
 
-  <section class="share-card">
+  <section class="help-card">
     <div class="icon-circle">
       <i class="bi bi-megaphone-fill"></i>
     </div>

@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { DashboardMenuComponent } from '../../../../../dashboard/components/dashboard-menu/dashboard-menu.component';
-import { HotLinksComponent } from '../../../../../dashboard/components/hot-links/hot-links.component';
 import { DASHBOARD_DATA } from '../../../../../dashboard/data/dashboard.data';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard-aside',
   standalone: true,
-  imports: [DashboardMenuComponent, HotLinksComponent],
+  imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './dashboard-aside.component.html',
   styleUrl: './dashboard-aside.component.css'
 })

@@ -1,6 +1,33 @@
 <aside class="left-column">
-  <app-dashboard-menu [items]="menuItems"></app-dashboard-menu>
-  <app-hot-links [links]="hotLinks"></app-hot-links>
+
+  <section class="account-menu">
+
+    
+    <header>
+      SHORTCUTS
+    </header>
+
+    
+    <ul>
+      <li *ngFor="let item of menuItems">
+        <a [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: item.path === '/' }">
+          <i [ngClass]="item.icon"></i>
+          {{ item.label }}
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <section class="account-menu">
+    <header>
+      LINKS
+    </header>
+
+    
+    <ul>
+      <li *ngFor="let item of hotLinks">{{ item.label }}</li>
+    </ul>
+  </section>
 
   <section class="ad-card">
     <p class="ad-title">memberplus</p>
