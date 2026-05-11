@@ -8,7 +8,7 @@ export const DASHBOARD_DATA: DashboardModel = {
   welcomeText:
     'ChamberMaster is your direct connection to the Pinellas Park/Gateway Chamber of Commerce. As a member of the Pinellas Park/Gateway Chamber of Commerce you have the opportunity to market your business to consumers visiting pinellaspark.com by enhancing your information home page with pictures and text, add an also post hot deals, job openings and events, add keywords to help consumers find you when they run searches, and run reports to see hit statistics for your home page and other advertised items.',
   topTabs: [
-    { label: 'Home', icon: IconsEnum.Home, path: '/' },
+    { label: 'Home', icon: IconsEnum.Home, path: '/dashboard' },
     { label: 'Events', icon: IconsEnum.Events, path: '/events' },
     { label: 'Resources', icon: IconsEnum.Resources, path: '/resources' },
     { label: 'News', icon: IconsEnum.NewsRelease, path: '/news' },
@@ -16,7 +16,7 @@ export const DASHBOARD_DATA: DashboardModel = {
   ],
 
   menuItems: [
-    { label: 'Personal Information', icon: IconsEnum.PersonalInformation, path: '/personal-information' },
+    { label: 'Personal Information', icon: IconsEnum.PersonalInformation, path: '/account/personal' },
     { label: 'Company Information', icon: IconsEnum.CompanyInformation, path: '/company-information' },
     { label: 'Hot Deals', icon: IconsEnum.HotDeals, path: '/hot-deals' },
     { label: 'Member To Member Deals', icon: IconsEnum.MemberToMemberDeal, path: '/member-to-member-deals' },

@@ -10,8 +10,14 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'home/dashboard',
+        redirectTo: 'dashboard/home',
         pathMatch: 'full'
+      },
+
+
+      {
+        path: 'dashboard',
+        loadChildren: () => import('../dashboard/dashboard-module').then(m => m.DashboardModule)
       },
 
       {

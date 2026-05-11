@@ -13,6 +13,7 @@ const routes: Routes = [
   {
     path: '', component: SettingLayout, data: { sidebarType: 'settings' },
     children: [
+      { path: '', component: SettingComponent, data: { sidebarType: 'settings' } },
       { path: 'personal', component: SettingComponent, data: { sidebarType: 'settings' } },
       { path: 'photo', component: Photo, data: { sidebarType: 'settings' } },
       { path: 'groups-interests', component: Groups, data: { sidebarType: 'settings' } },
@@ -20,11 +21,7 @@ const routes: Routes = [
       { path: 'change-password', component: ChangePassword, data: { sidebarType: 'settings' } },
       { path: 'profile', component: Profile, data: { sidebarType: 'settings' } },
     ]
-
   },
-
-
-
 ];
 
 @NgModule({
