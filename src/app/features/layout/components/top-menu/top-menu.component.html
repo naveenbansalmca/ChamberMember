@@ -1,9 +1,8 @@
-<nav class="top-tabs">
-    <div style="display: flex; gap: 1.6rem;width: 729px;">
-        <a *ngFor="let tab of topNav" [routerLink]="tab.path" routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: tab.path === '/' }">
-            <i [ngClass]="tab.icon"></i>
-            {{ tab.label }}
-        </a>
-    </div>
-</nav>
+<ul class="PrimaryNav with-indicator">
+    <li class="Nav-item" *ngFor="let tab of topNav" routerLinkActive="is-active"
+        [routerLinkActiveOptions]="{ exact: tab.path === '/' }">
+        <a [routerLink]="tab.path"> <i [ngClass]="tab.icon"></i>
+            {{ tab.label }}</a>
+    </li>
+
+</ul>
