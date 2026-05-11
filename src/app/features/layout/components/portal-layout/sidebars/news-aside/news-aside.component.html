@@ -1,13 +1,14 @@
 <aside class="left-column">
   <section class="account-menu">
-    
+
     <header>
       COMMUNITY
     </header>
 
     <ul>
-      <li *ngFor="let item of menuItems; let i = index">
-        <a [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: item.path === '/' }">
+      <li *ngFor="let item of menuItems; let i = index" routerLinkActive="menu-group active-group"
+        [routerLinkActiveOptions]="{ exact: item.path === '/' }">
+        <a [routerLink]="item.path">
           <i [ngClass]="item.icon"></i>
           {{ item.label }}
         </a>

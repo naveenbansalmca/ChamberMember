@@ -12,12 +12,12 @@ import { IconsEnum } from '../../../../../dashboard/data/IconsEnum';
 })
 export class NewsAsideComponent {
   readonly menuItems = [
-    { label: 'Hot Deals', icon: IconsEnum.HotDeals, path: '/hot-deals' },
-    { label: 'Member To Member Deals', icon: IconsEnum.MemberToMemberDeal, path: '/member-to-member-deals' },
-    { label: 'News Releases', icon: IconsEnum.NewsRelease, path: '/news-releases' },
-    { label: 'Job Postings', icon: IconsEnum.JobPostings, path: '/job-postings' },
-    { label: 'MarketSpace', icon: IconsEnum.MarketSpaceItems, path: '/marketspace' },
-    { label: 'Social Feed', icon: IconsEnum.SocialFeed, path: '/personal-information' },
-    { label: 'Request for Proposals', icon: IconsEnum.RequestsForProposal, path: '/request-for-proposals' }
+    { label: 'Hot Deals', icon: IconsEnum.HotDeals, path: '/news/hot-deals' },
+    { label: 'Member To Member Deals', icon: IconsEnum.MemberToMemberDeal, path: '/news/member-to-member-deals' },
+    { label: 'News Releases', icon: IconsEnum.NewsRelease, path: '/news/news-releases' },
+    { label: 'Job Postings', icon: IconsEnum.JobPostings, path: '/news/job-postings' },
+    { label: 'MarketSpace', icon: IconsEnum.MarketSpaceItems, path: '/news/marketspace' },
+    { label: 'Social Feed', icon: IconsEnum.SocialFeed, path: '/news/social-feeds' },
+    { label: 'Request for Proposals', icon: IconsEnum.RequestsForProposal, path: '/news/request-for-proposals' }
   ];
 }

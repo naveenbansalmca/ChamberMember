@@ -2,8 +2,10 @@
   <section class="account-menu">
     <header>ACCOUNT SETTINGS</header>
     <ul>
-      <li *ngFor="let item of personalItems" routerLinkActive="menu-group active-group" [routerLinkActiveOptions]="{ exact: true }">
-        <a [routerLink]="item.path">{{ item.label }} </a></li>
+      <li *ngFor="let item of personalItems" routerLinkActive="menu-group active-group"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <a [routerLink]="item.path">{{ item.label }} </a>
+      </li>
     </ul>
 
     <div class="menu-group collapsible">Company</div>

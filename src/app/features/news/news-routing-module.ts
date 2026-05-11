@@ -8,6 +8,7 @@ import { JobPostingComponent } from './components/job-posting/job-posting.compon
 import { MarketSpaceComponent } from './components/market-space/market-space.component';
 import { SocialFeedComponent } from './components/social-feed/social-feed.component';
 import { RequestProposalComponent } from './components/request-proposal/request-proposal.component';
+import { NewReleaseComponent } from './components/new-release/new-release.component';
 
 const routes: Routes = [
 
@@ -17,10 +18,11 @@ const routes: Routes = [
       { path: '', component: NewsComponent, data: { sidebarType: 'news' } },
       { path: 'hot-deals', component: HotDealsComponent, data: { sidebarType: 'news' } },
       { path: 'member-to-member-deals', component: MembertoMemberComponent, data: { sidebarType: 'news' } },
+      { path: 'news-releases', component: NewReleaseComponent, data: { sidebarType: 'news' } },
       { path: 'job-postings', component: JobPostingComponent, data: { sidebarType: 'news' } },
       { path: 'marketspace', component: MarketSpaceComponent, data: { sidebarType: 'news' } },
       { path: 'social-feeds', component: SocialFeedComponent, data: { sidebarType: 'news' } },
-      { path: 'request-for-proposal', component: RequestProposalComponent, data: { sidebarType: 'news' } },
+      { path: 'request-for-proposals', component: RequestProposalComponent, data: { sidebarType: 'news' } },
     ]
   },
 ];

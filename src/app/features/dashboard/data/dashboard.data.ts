@@ -18,12 +18,12 @@ export const DASHBOARD_DATA: DashboardModel = {
   menuItems: [
     { label: 'Personal Information', icon: IconsEnum.PersonalInformation, path: '/account/personal' },
     { label: 'Company Information', icon: IconsEnum.CompanyInformation, path: '/company-information' },
-    { label: 'Hot Deals', icon: IconsEnum.HotDeals, path: '/hot-deals' },
-    { label: 'Member To Member Deals', icon: IconsEnum.MemberToMemberDeal, path: '/member-to-member-deals' },
-    { label: 'News Releases', icon: IconsEnum.NewsRelease, path: '/news-releases' },
-    { label: 'Job Postings', icon: IconsEnum.JobPostings, path: '/job-postings' },
-    { label: 'MarketSpace', icon: IconsEnum.MarketSpaceItems, path: '/marketspace' },
-    { label: 'Request for Proposals', icon: IconsEnum.RequestsForProposal, path: '/request-for-proposals' }
+    { label: 'Hot Deals', icon: IconsEnum.HotDeals, path: '/news/hot-deals' },
+    { label: 'Member To Member Deals', icon: IconsEnum.MemberToMemberDeal, path: '/news/member-to-member-deals' },
+    { label: 'News Releases', icon: IconsEnum.NewsRelease, path: '/news/news-releases' },
+    { label: 'Job Postings', icon: IconsEnum.JobPostings, path: '/news/job-postings' },
+    { label: 'MarketSpace', icon: IconsEnum.MarketSpaceItems, path: '/news/marketspace' },
+    { label: 'Request for Proposals', icon: IconsEnum.RequestsForProposal, path: '/news/request-for-proposals' }
   ],
 
   hotLinks: [
