@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +15,7 @@ export class AuthService {
   ) {}
 
   login(data: any) {
-
-    const fakeToken = 'jwt-token-demo';
-
-    localStorage.setItem('token', fakeToken);
-    localStorage.setItem('role', 'Admin');
-
-    this.router.navigate(['/dashboard']);
+    return this.http.post(`${environment.apiBaseUrl}auth/login`, data);
   }
 
   logout() {
