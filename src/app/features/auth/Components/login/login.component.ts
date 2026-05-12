@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../core/services/auth';
 import { Router } from '@angular/router';
-import { LoaderService } from '../../core/services/loader.service';
+import { AuthService } from '../../../../core/services/auth';
+import { LoaderService } from '../../../../core/services/loader.service';
+
 
 @Component({
   selector: 'app-login',

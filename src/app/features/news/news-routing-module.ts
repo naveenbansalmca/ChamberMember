@@ -9,19 +9,20 @@ import { MarketSpaceComponent } from './components/market-space/market-space.com
 import { SocialFeedComponent } from './components/social-feed/social-feed.component';
 import { RequestProposalComponent } from './components/request-proposal/request-proposal.component';
 import { NewReleaseComponent } from './components/new-release/new-release.component';
+import { AuthGuard } from '../../core/guards/auth-guard';
 
 const routes: Routes = [
 
   {
-    path: '', component: NewsLayoutComponent, data: { sidebarType: 'news' },
+    path: '', component: NewsLayoutComponent, data: { sidebarType: 'news' }, canActivate: [AuthGuard],
     children: [
-      { path: '', component: NewsComponent, data: { sidebarType: 'news' } },
-      { path: 'hot-deals', component: HotDealsComponent, data: { sidebarType: 'news' } },
-      { path: 'member-to-member-deals', component: MembertoMemberComponent, data: { sidebarType: 'news' } },
-      { path: 'news-releases', component: NewReleaseComponent, data: { sidebarType: 'news' } },
-      { path: 'job-postings', component: JobPostingComponent, data: { sidebarType: 'news' } },
-      { path: 'marketspace', component: MarketSpaceComponent, data: { sidebarType: 'news' } },
-      { path: 'social-feeds', component: SocialFeedComponent, data: { sidebarType: 'news' } },
+      { path: '', component: NewsComponent, data: { sidebarType: 'news' }, canActivate: [AuthGuard] },
+      { path: 'hot-deals', component: HotDealsComponent, data: { sidebarType: 'news' }, canActivate: [AuthGuard] },
+      { path: 'member-to-member-deals', component: MembertoMemberComponent, data: { sidebarType: 'news' }, canActivate: [AuthGuard] },
+      { path: 'news-releases', component: NewReleaseComponent, data: { sidebarType: 'news' }, canActivate: [AuthGuard] },
+      { path: 'job-postings', component: JobPostingComponent, data: { sidebarType: 'news' }, canActivate: [AuthGuard] },
+      { path: 'marketspace', component: MarketSpaceComponent, data: { sidebarType: 'news' }, canActivate: [AuthGuard] },
+      { path: 'social-feeds', component: SocialFeedComponent, data: { sidebarType: 'news' }, canActivate: [AuthGuard] },
       { path: 'request-for-proposals', component: RequestProposalComponent, data: { sidebarType: 'news' } },
     ]
   },
