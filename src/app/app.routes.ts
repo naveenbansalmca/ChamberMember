@@ -26,6 +26,30 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./features/dashboard/dashboard-module')
             .then(m => m.DashboardModule)
+      },
+      {
+        path: 'account',
+        loadChildren: () =>
+          import('./features/settings/settings-module')
+            .then(m => m.SettingsModule)
+      },
+      {
+        path: 'news',
+        loadChildren: () =>
+          import('./features/news/news-module')
+            .then(m => m.NewsModule)
+      },
+      {
+        path: 'resources',
+        loadChildren: () =>
+          import('./features/resources/resources-module')
+            .then(m => m.ResourcesModule)
+      },
+      {
+        path: 'events',
+        loadChildren: () =>
+          import('./features/events/events-module')
+            .then(m => m.EventsModule)
       }
     ]
   }
