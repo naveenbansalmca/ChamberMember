@@ -17,24 +17,24 @@ const routes: Routes = [
 
       {
         path: 'dashboard',
-        loadChildren: () => import('../dashboard/dashboard-module').then(m => m.DashboardModule)
+        loadChildren: () => import('../features/dashboard/dashboard-module').then(m => m.DashboardModule)
       },
 
       {
         path: 'events',
-        loadChildren: () => import('../events/events-module').then(m => m.EventsModule)
+        loadChildren: () => import('../features/events/events-module').then(m => m.EventsModule)
       },
       {
         path: 'account',
-        loadChildren: () => import('../settings/settings-module').then(m => m.SettingsModule)
+        loadChildren: () => import('../features/settings/settings-module').then(m => m.SettingsModule)
       },
       {
         path: 'news',
-        loadChildren: () => import('../news/news-module').then(m => m.NewsModule)
+        loadChildren: () => import('../features/news/news-module').then(m => m.NewsModule)
       },
       {
         path: 'resources',
-        loadChildren: () => import('../resources/resources-module').then(m => m.ResourcesModule)
+        loadChildren: () => import('../features/resources/resources-module').then(m => m.ResourcesModule)
       },
 
     ]

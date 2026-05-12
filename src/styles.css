@@ -14,8 +14,6 @@
     overflow: hidden;
 }
 
-
-
 .top-tabs {
     display: flex;
     gap: 35px;
@@ -58,8 +56,3 @@
   .top-tabs a.active::after {
     width: 100%;
   }
-
-
-
-
-  

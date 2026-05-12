@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { DASHBOARD_DATA } from '../../../dashboard/data/dashboard.data';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { DASHBOARD_DATA } from '../../../features/dashboard/data/dashboard.data';
 
 @Component({
   selector: 'app-top-menu',

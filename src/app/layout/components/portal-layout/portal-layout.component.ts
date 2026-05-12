@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRouteSnapshot, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { DASHBOARD_DATA } from '../../../dashboard/data/dashboard.data';
 import { DashboardFooterComponent } from './dashboard-footer/dashboard-footer.component';
 import { DashboardHeaderComponent } from './dashboard-header/dashboard-header.component';
 import { TopMenuComponent } from '../top-menu/top-menu.component';
@@ -11,6 +10,7 @@ import { EventsAsideComponent } from './sidebars/events-aside/events-aside.compo
 import { ResourcesAsideComponent } from './sidebars/resources-aside/resources-aside.component';
 import { NewsAsideComponent } from './sidebars/news-aside/news-aside.component';
 import { SettingsAsideComponent } from './sidebars/settings-aside/settings-aside.component';
+import { DASHBOARD_DATA } from '../../../features/dashboard/data/dashboard.data';
 
 type SidebarType = 'dashboard' | 'events' | 'resources' | 'news' | 'settings';
 

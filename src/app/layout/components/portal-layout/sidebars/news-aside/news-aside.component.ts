@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { IconsEnum } from '../../../../../dashboard/data/IconsEnum';
+import { IconsEnum } from '../../../../../features/dashboard/data/IconsEnum';
+
 
 @Component({
   selector: 'app-news-aside',

@@ -21,5 +21,5 @@ export class SettingsAsideComponent {
 
   isOpen: boolean = true;
 
-  SelectedButton:string='personal';
+  SelectedButton:string='Personal';
 }
