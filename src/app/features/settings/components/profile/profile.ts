@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { ProfileSettingsModel } from '../../Models/profile-settings.model';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RequiredDirective } from '../../../../shared/styles/directive/required.directive';
 
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,RequiredDirective],
   templateUrl: './profile.html',
   styleUrl: './profile.css',
 })

@@ -3,59 +3,59 @@
 @import "tailwindcss";
 
 .tabactive {
-    font-weight: bolder;
+  font-weight: bolder;
 }
 
 
 .page-session {
-    background: #fff;
-    border: 1px solid #d9e0ec;
-    border-radius: 6px;
-    overflow: hidden;
+  background: #fff;
+  border: 1px solid #d9e0ec;
+  border-radius: 6px;
+  overflow: hidden;
 }
 
 .top-tabs {
-    display: flex;
-    gap: 35px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .top-tabs a {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 18px 0;
-    text-decoration: none;
-    color: #3c4b64;
-    font-size: 18px;
-    transition: color 0.8s ease;
-  }
-  
-  /* underline */
-  .top-tabs a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 0;
-    height: 3px;
-    background: #0d47a1;
-    transition: width 0.8s ease;
-  }
-  
-  /* active menu */
-  .top-tabs a.active {
-    color: #0d47a1;
-    font-weight: 600;
-  }
-  
-  /* animate underline */
-  .top-tabs a.active::after {
-    width: 100%;
-  }
+  display: flex;
+  gap: 35px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.top-tabs a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 18px 0;
+  text-decoration: none;
+  color: #3c4b64;
+  font-size: 18px;
+  transition: color 0.8s ease;
+}
+
+/* underline */
+.top-tabs a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 3px;
+  background: #0d47a1;
+  transition: width 0.8s ease;
+}
+
+/* active menu */
+.top-tabs a.active {
+  color: #0d47a1;
+  font-weight: 600;
+}
+
+/* animate underline */
+.top-tabs a.active::after {
+  width: 100%;
+}
 
 .global-loader-overlay {
   position: fixed;
@@ -86,4 +86,25 @@
   color: #b00020;
   margin: 12px 0;
   font-size: 0.95rem;
+}
+
+
+
+input[type="text"],
+input[type="email"],
+select {
+  min-height: 34px;
+  height: 34px;
+  line-height: 1.25;
+  box-sizing: border-box;
+}
+
+select {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.required {
+  color: red;
+  padding-left: 5px;
 }
