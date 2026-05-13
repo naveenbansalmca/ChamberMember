@@ -1,155 +1,189 @@
-<form [formGroup]="settingsForm" (ngSubmit)="saveChanges()">
-    <header class="settings-header">
-      <div>
-        <h2>My Profile</h2>
-        <p>Manage your personal information and preferences.</p>
-      </div>
-  
-      <div class="header-actions">
-        <button type="button" class="btn secondary" (click)="clearChanges()">Clear Changes</button>
-        <button type="submit" class="btn primary">Save Changes</button>
-      </div>
-    </header>
-  
-    <section class="form-grid">
-      <div class="field">
-        <label>Prefix</label>
-        <select formControlName="prefix">
-          <option>Mr.</option>
-          <option>Mrs.</option>
-          <option>Ms.</option>
-          <option>Dr.</option>
-        </select>
-      </div>
-  
-      <div class="field">
-        <label>Greeting</label>
-        <select formControlName="greeting">
-          <option>Hello</option>
-          <option>Hi</option>
-          <option>Dear</option>
-        </select>
-      </div>
-  
-      <div class="field">
-        <label>First Name *</label>
-        <input type="text" formControlName="firstName" />
-      </div>
-  
-      <div class="field">
-        <label>Job Title</label>
-        <input type="text" formControlName="jobTitle" />
-      </div>
-  
-      <div class="field">
-        <label>Middle Name</label>
-        <input type="text" formControlName="middleName" />
-      </div>
-  
-      <div class="field">
-        <label>Contact Preference *</label>
-        <select formControlName="contactPreference">
-          <option>Email</option>
-          <option>Phone</option>
-          <option>SMS</option>
-        </select>
-      </div>
-  
-      <div class="field">
-        <label>Last Name *</label>
-        <input type="text" formControlName="lastName" />
-      </div>
-  
-      <div class="field">
-        <label>Phone Preference *</label>
-        <select formControlName="phonePreference">
-          <option>Work Phone</option>
-          <option>Home Phone</option>
-          <option>Cell Phone</option>
-        </select>
-      </div>
-  
-      <div class="field">
-        <label>Address Line 1 *</label>
-        <input type="text" formControlName="addressLine1" />
-      </div>
-  
-      <div class="field">
-        <label>Work Phone</label>
-        <input type="text" formControlName="workPhone" />
-      </div>
-  
-      <div class="field">
-        <label>Address Line 2</label>
-        <input type="text" formControlName="addressLine2" />
-      </div>
-  
-      <div class="field">
-        <label>Home Phone</label>
-        <input type="text" formControlName="homePhone" />
-      </div>
-  
-      <div class="field">
-        <label>City *</label>
-        <input type="text" formControlName="city" />
-      </div>
-  
-      <div class="field">
-        <label>Cell Phone</label>
-        <input type="text" formControlName="cellPhone" />
-      </div>
-  
-      <div class="field">
-        <label>State *</label>
-        <select formControlName="state">
-          <option>FL</option>
-          <option>CA</option>
-          <option>NY</option>
-        </select>
-      </div>
-  
-      <div class="field">
-        <label>Alt Phone</label>
-        <input type="text" formControlName="altPhone" />
-      </div>
-  
-      <div class="field">
-        <label>Postal Code *</label>
-        <input type="text" formControlName="postalCode" />
-      </div>
-  
-      <div class="field">
-        <label>Fax</label>
-        <input type="text" formControlName="fax" />
-      </div>
-  
-      <div class="field">
-        <label>Country</label>
-        <select formControlName="country">
-          <option>United States</option>
-          <option>Canada</option>
-        </select>
-      </div>
-  
-      <div class="field">
-        <label>Email *</label>
-        <input type="email" formControlName="email" />
-      </div>
-    </section>
-  
-    <section class="checkbox-grid">
-      <label><input type="checkbox" formControlName="repActive" /> Rep is currently ACTIVE with this member.</label>
-      <label><input type="checkbox" formControlName="primaryContact" /> Primary Contact</label>
-      <label><input type="checkbox" formControlName="billingContact" /> Billing Contact</label>
-    </section>
-  
-    <section class="bio-wrap">
-      <label>Personal Bio</label>
-      <textarea rows="5" formControlName="personalBio" placeholder="Write about yourself..."></textarea>
-    </section>
-  
-    <footer class="bottom-actions">
-      <button type="button" class="btn secondary" (click)="clearChanges()">Clear Changes</button>
-      <button type="submit" class="btn primary">Save Changes</button>
-    </footer>
-  </form>
+<form [formGroup]="settingsForm" (ngSubmit)="saveChanges()" class="p-6 bg-white shadow-md rounded-lg">
+  <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+    <div>
+      <h2 class="text-2xl font-bold text-gray-800">My Profile</h2>
+      <p class="text-gray-600 mt-1">Manage your personal information and preferences.</p>
+    </div>
+
+    <div class="flex space-x-4 mt-4 md:mt-0">
+      <button type="button" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
+        (click)="clearChanges()">Clear Changes</button>
+      <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save Changes</button>
+    </div>
+  </header>
+
+  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+    <div class="flex flex-col">
+      <label class="text-sm font-medium text-gray-700 mb-1">Prefix</label>
+      <select formControlName="prefix"
+        class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <option>Mr.</option>
+        <option>Mrs.</option>
+        <option>Ms.</option>
+        <option>Dr.</option>
+      </select>
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-sm font-medium text-gray-700 mb-1">Greeting</label>
+      <select formControlName="greeting"
+        class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <option>Hello</option>
+        <option>Hi</option>
+        <option>Dear</option>
+      </select>
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-sm font-medium text-gray-700 mb-1">First Name *</label>
+      <input type="text" formControlName="firstName"
+        class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-sm font-medium text-gray-700 mb-1">Job Title</label>
+      <input type="text" formControlName="jobTitle"
+        class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-sm font-medium text-gray-700 mb-1">Middle Name</label>
+      <input type="text" formControlName="middleName"
+        class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-sm font-medium text-gray-700 mb-1">Contact Preference *</label>
+      <select formControlName="contactPreference"
+        class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <option>Email</option>
+        <option>Phone</option>
+        <option>SMS</option>
+      </select>
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-sm font-medium text-gray-700 mb-1">Last Name *</label>
+      <input type="text" formControlName="lastName"
+        class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-sm font-medium text-gray-700 mb-1">Phone Preference *</label>
+      <select formControlName="phonePreference"
+        class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <option>Work Phone</option>
+        <option>Home Phone</option>
+        <option>Cell Phone</option>
+      </select>
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-sm font-medium text-gray-700 mb-1">Address Line 1 *</label>
+      <input type="text" formControlName="addressLine1"
+        class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-sm font-medium text-gray-700 mb-1">Work Phone</label>
+      <input type="text" formControlName="workPhone"
+        class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-sm font-medium text-gray-700 mb-1">Address Line 2</label>
+      <input type="text" formControlName="addressLine2"
+        class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-sm font-medium text-gray-700 mb-1">Home Phone</label>
+      <input type="text" formControlName="homePhone"
+        class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-sm font-medium text-gray-700 mb-1">City *</label>
+      <input type="text" formControlName="city"
+        class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-sm font-medium text-gray-700 mb-1">Cell Phone</label>
+      <input type="text" formControlName="cellPhone"
+        class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-sm font-medium text-gray-700 mb-1">State *</label>
+      <select formControlName="state"
+        class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <option>FL</option>
+        <option>CA</option>
+        <option>NY</option>
+      </select>
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-sm font-medium text-gray-700 mb-1">Alt Phone</label>
+      <input type="text" formControlName="altPhone"
+        class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-sm font-medium text-gray-700 mb-1">Postal Code *</label>
+      <input type="text" formControlName="postalCode"
+        class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-sm font-medium text-gray-700 mb-1">Fax</label>
+      <input type="text" formControlName="fax"
+        class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-sm font-medium text-gray-700 mb-1">Country</label>
+      <select formControlName="country"
+        class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <option>United States</option>
+        <option>Canada</option>
+      </select>
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-sm font-medium text-gray-700 mb-1">Email *</label>
+      <input type="email" formControlName="email"
+        class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+  </section>
+
+  <section class="mb-6">
+    <div class="space-y-2">
+      <label class="flex items-center space-x-2">
+        <input type="checkbox" formControlName="repActive" class="rounded" />
+        <span class="text-sm text-gray-700">Rep is currently ACTIVE with this member.</span>
+      </label>
+      <label class="flex items-center space-x-2">
+        <input type="checkbox" formControlName="primaryContact" class="rounded" />
+        <span class="text-sm text-gray-700">Primary Contact</span>
+      </label>
+      <label class="flex items-center space-x-2">
+        <input type="checkbox" formControlName="billingContact" class="rounded" />
+        <span class="text-sm text-gray-700">Billing Contact</span>
+      </label>
+    </div>
+  </section>
+
+  <section class="mb-6">
+    <label class="block text-sm font-medium text-gray-700 mb-2">Personal Bio</label>
+    <textarea rows="5" formControlName="personalBio" placeholder="Write about yourself..."
+      class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+  </section>
+
+  <footer class="flex flex-col md:flex-row justify-end space-y-4 md:space-y-0 md:space-x-4">
+    <button type="button" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
+      (click)="clearChanges()">Clear Changes</button>
+    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save Changes</button>
+  </footer>
+</form>
