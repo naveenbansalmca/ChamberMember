@@ -71,8 +71,20 @@ textarea {
   font-size: 0.86rem;
 }
 
-.feed-toolbar .filter {
+.filter-group {
   margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filter-select {
+  border: 1px solid #d5dde9;
+  border-radius: 4px;
+  padding: 0.35rem 0.55rem;
+  font-size: 0.86rem;
+  background: #fff;
+  color: #334155;
 }
 
 .feed-list h4 {

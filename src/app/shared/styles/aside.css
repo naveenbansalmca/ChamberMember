@@ -159,11 +159,24 @@
 }
 
 .menu-group.collapsible {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   font-size: 18px;
   background-color: bisque;
   font-weight: 700;
+  cursor: pointer;
+  user-select: none;
 }
 
+.collapse-icon {
+  transition: transform 0.2s ease;
+  font-size: 1rem;
+}
+
+.menu-group.collapsible.open .collapse-icon {
+  transform: rotate(90deg);
+}
 
 .collapse-panel-body {
   max-height: 0;

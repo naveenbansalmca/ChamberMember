@@ -21,12 +21,19 @@
     </section>
 
     <section class="feed-list">
-      <div class="feed-toolbar">
+      <div class="feed-toolbar px-[10px]">
         <button (click)="FilterPostByFavourite(0)" class="cursor-pointer"
           [ngClass]="PostActiveTab==1 ? 'tabactive' : ''">All</button>
         <button (click)="FilterPostByFavourite(1)" class="cursor-pointer"
           [ngClass]="PostActiveTab==2 ? 'tabactive' : ''">Favorites</button>
-        <span class="filter">Filter</span>
+        <div class="filter-group">
+          <span class="filter">Filter</span>
+          <select id="postTypeFilter" #postTypeSelect class="filter-select" (change)="updateFilterType(postTypeSelect.value)">
+            <option value="0">All Types</option>
+            <option value="1">Text</option>
+            <option value="2">Link</option>
+          </select>
+        </div>
       </div>
       <article *ngFor="let post of displayPost">
         <h4>{{ post.author }}</h4>

@@ -17,18 +17,29 @@ export class DashboardPageComponent {
   displayPost = [...this.dashboard.posts];
 
   PostActiveTab = 1;
+  selectedPostType = 0;
 
+  updateFilterType(typeId: string) {
+    this.selectedPostType = Number(typeId);
+    this.applyFilters();
+  }
 
   FilterPostByFavourite(params: number) {
-    
-    if (params == 1) {
-      this.PostActiveTab = 2;
-      this.displayPost = this.dashboard.posts.filter(a => a.isfavourite);
-    }
-    else {
-      this.PostActiveTab = 1;
-      this.displayPost = [...this.dashboard.posts];
+    this.PostActiveTab = params === 1 ? 2 : 1;
+    this.applyFilters();
+  }
+
+  private applyFilters() {
+    let filtered = [...this.dashboard.posts];
+
+    if (this.PostActiveTab === 2) {
+      filtered = filtered.filter(post => post.isfavourite);
     }
 
+    if (this.selectedPostType > 0) {
+      filtered = filtered.filter(post => post.typeId === this.selectedPostType);
+    }
+
+    this.displayPost = filtered;
   }
 }

@@ -1,7 +1,10 @@
 <aside class="left-column">
   <section class="account-menu">
     <header>ACCOUNT SETTINGS</header>
-    <div class="menu-group collapsible" (click)="SelectedButton='Personal'">Personal</div>
+    <div class="menu-group collapsible" [class.open]="SelectedButton=='Personal'" (click)="SelectedButton='Personal'">
+      <span>Personal</span>
+      <i class="bi bi-chevron-right collapse-icon"></i>
+    </div>
     <div class="collapse-panel-body" [class.open]="SelectedButton=='Personal'">
       <ul>
         <li *ngFor="let item of personalItems" routerLinkActive="menu-group active-group"
@@ -11,7 +14,10 @@
       </ul>
     </div>
 
-    <div class="menu-group collapsible" (click)="SelectedButton='Company'">Company</div>
+    <div class="menu-group collapsible" [class.open]="SelectedButton=='Company'" (click)="SelectedButton='Company'">
+      <span>Company</span>
+      <i class="bi bi-chevron-right collapse-icon"></i>
+    </div>
 
     <div class="collapse-panel-body" [class.open]="SelectedButton=='Company'">
       <ul>
@@ -22,7 +28,10 @@
     </div>
 
 
-    <div class="menu-group collapsible" (click)="SelectedButton='Billing'">Billing</div>
+    <div class="menu-group collapsible" [class.open]="SelectedButton=='Billing'" (click)="SelectedButton='Billing'">
+      <span>Billing</span>
+      <i class="bi bi-chevron-right collapse-icon"></i>
+    </div>
     <div class="collapse-panel-body" [class.open]="SelectedButton=='Billing'">
       <ul>
         <li>
