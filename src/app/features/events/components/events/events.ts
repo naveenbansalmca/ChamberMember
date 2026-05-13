@@ -28,6 +28,10 @@ export class EventsComponent implements AfterViewInit {
   readonly displayedColumns = ['date', 'details', 'meta'];
   readonly events = this.generateEvents(60);
   readonly dataSource = new MatTableDataSource<EventItem>(this.events);
+  activeView: 'list' | 'calendar' = 'list';
+  currentCalendarMonthIndex = 0;
+  readonly weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  readonly monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
@@ -35,8 +39,73 @@ export class EventsComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
+  switchView(view: 'list' | 'calendar') {
+    this.activeView = view;
+  }
+
   viewDetails(eventId: number) {
     this.router.navigate(['./event-details', eventId], { relativeTo: this.route });
+  }
+
+  prevCalendarMonth() {
+    if (this.currentCalendarMonthIndex > 0) {
+      this.currentCalendarMonthIndex -= 1;
+    }
+  }
+
+  nextCalendarMonth() {
+    if (this.currentCalendarMonthIndex < this.calendarMonths.length - 1) {
+      this.currentCalendarMonthIndex += 1;
+    }
+  }
+
+  get currentCalendarMonth() {
+    return this.calendarMonths[this.currentCalendarMonthIndex] || null;
+  }
+
+  get calendarMonths() {
+    const groups = new Map<string, { month: string; monthIndex: number; year: number; events: EventItem[] }>();
+
+    this.events.forEach(event => {
+      const monthIndex = this.monthNames.indexOf(event.month);
+      const year = 2026;
+      const monthKey = `${event.month}-${year}`;
+      if (!groups.has(monthKey)) {
+        groups.set(monthKey, { month: event.month, monthIndex, year, events: [] });
+      }
+      groups.get(monthKey)!.events.push(event);
+    });
+
+    return Array.from(groups.values())
+      .sort((a, b) => a.monthIndex - b.monthIndex)
+      .map(group => ({
+        ...group,
+        weeks: this.buildMonthGrid(group.monthIndex, group.year, group.events)
+      }));
+  }
+
+  private buildMonthGrid(monthIndex: number, year: number, events: EventItem[]) {
+    const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+    const firstWeekday = new Date(year, monthIndex, 1).getDay();
+    const weeks: Array<Array<{ day: number; events: EventItem[] } | null>> = [];
+    let week: Array<{ day: number; events: EventItem[] } | null> = Array(7).fill(null);
+
+    for (let i = 0; i < firstWeekday; i++) {
+      week[i] = null;
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const weekday = new Date(year, monthIndex, day).getDay();
+      const dayEvents = events.filter(e => Number(e.day) === day);
+      week[weekday] = { day, events: dayEvents };
+
+      if (weekday === 6 || day === daysInMonth) {
+        weeks.push(week);
+        week = Array(7).fill(null);
+      }
+    }
+
+    return weeks;
   }
 
   private generateEvents(total: number): EventItem[] {
