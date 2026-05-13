@@ -12,7 +12,7 @@ const routes: Routes = [
     path: '', component: EventLayoutComponent, data: { sidebarType: 'events' }, canActivate: [AuthGuard],
     children: [
       { path: '', component: EventsComponent, data: { sidebarType: 'events' }, canActivate: [AuthGuard] },
-      { path: 'event-details', component: EventDetailsComponent, data: { sidebarType: 'events' }, canActivate: [AuthGuard] }
+      { path: 'event-details/:id', component: EventDetailsComponent, data: { sidebarType: 'events' }, canActivate: [AuthGuard] }
 
 
     ]

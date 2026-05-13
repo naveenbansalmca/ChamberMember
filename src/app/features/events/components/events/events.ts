@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 interface EventItem {
+  id: number;
   month: string;
   day: string;
   weekDay: string;
@@ -27,12 +29,18 @@ export class EventsComponent implements AfterViewInit {
   readonly events = this.generateEvents(60);
   readonly dataSource = new MatTableDataSource<EventItem>(this.events);
 
+  constructor(private router: Router, private route: ActivatedRoute) {}
+
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
 
+  viewDetails(eventId: number) {
+    this.router.navigate(['./event-details', eventId], { relativeTo: this.route });
+  }
+
   private generateEvents(total: number): EventItem[] {
-    const seeds: EventItem[] = [
+    const seeds: Omit<EventItem, 'id'>[] = [
       {
         month: 'MAY',
         day: '27',
@@ -92,6 +100,7 @@ export class EventsComponent implements AfterViewInit {
     return Array.from({ length: total }, (_, idx) => {
       const seed = seeds[idx % seeds.length];
       return {
+        id: idx + 1,
         ...seed,
         title: `${seed.title} #${idx + 1}`
       };
