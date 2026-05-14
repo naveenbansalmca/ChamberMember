@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ViewChild, OnInit, Inject } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EventService } from '../../Services/event.service';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -13,6 +13,7 @@ import { EventItem } from '../../Models/EventItem';
   imports: [CommonModule, MatTableModule, MatPaginatorModule],
   templateUrl: './events.html',
   styleUrl: './events.css',
+  encapsulation: ViewEncapsulation.None
 })
 export class EventsComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -29,6 +30,7 @@ export class EventsComponent implements AfterViewInit, OnInit {
     private router: Router,
     private route: ActivatedRoute,
     @Inject(EventService) private eventService: EventService
+    
   ) { }
 
   ngOnInit(): void {

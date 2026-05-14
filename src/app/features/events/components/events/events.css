@@ -1,14 +1,5 @@
-.events-title-bar {
-    background: #0f3f7f;
-    color: #fff;
-    padding: 0.72rem 1rem;
-    font-size: 1rem;
-    font-weight: 700;
-}
 
-.events-panel {
-    padding: 0.8rem;
-}
+
 
 .panel-toolbar {
     display: flex;

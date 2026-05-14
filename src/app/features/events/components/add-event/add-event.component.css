@@ -1,0 +1,38 @@
+/* Add Event Component Styles */
+
+:host {
+  display: block;
+}
+
+/* Form styling */
+textarea {
+  resize: vertical;
+  font-family: inherit;
+}
+
+/* Input and select focus states */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #0d47a1;
+  box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.1);
+}
+
+/* Button hover effects */
+button:not(:disabled) {
+  transition: all 0.3s ease;
+}
+
+button:not(:disabled):active {
+  transform: translateY(1px);
+}
+
+/* Rich text editor placeholder */
+textarea::placeholder {
+  color: #cbd5e1;
+}
+
+input::placeholder {
+  color: #cbd5e1;
+}

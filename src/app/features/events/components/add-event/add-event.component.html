@@ -1,1 +1,367 @@
-<p>add-event works!</p>
+<header class="page-title-bar">Create New Event
+  <p class="text-sm text-[#cba4a4]">Fill in the details below to create a new event.</p>
+</header>
+
+
+<section class="page-panel">
+
+  <!-- Action Buttons -->
+  <div class="flex gap-3 mb-2 justify-end">
+    <button (click)="saveAsDraft()" class="px-6 py-2 btn-primary">
+      Save as Draft
+    </button>
+    <button class="px-6 py-2 btn-secondary">
+      Cancel
+    </button>
+    <button (click)="submitForApproval()" class="px-6 py-2 btn-primary">
+      Submit for Approval
+    </button>
+  </div>
+
+  <!-- Form Container -->
+  <form [formGroup]="eventForm">
+    <!-- General Information Section -->
+    <div class="bg-slate-50 p-5 rounded-lg mb-6">
+      <h2 class="text-lg font-semibold text-slate-800 mb-4">General Information</h2>
+
+      <!-- Event Title -->
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-slate-700 mb-2" RequiredSign>
+          Event Title
+        </label>
+        <input type="text" formControlName="eventTitle" placeholder="Enter event title"
+          class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500" />
+      </div>
+
+      <!-- All Day Event Checkbox -->
+      <div class="flex items-center mb-4">
+        <input type="checkbox" id="allDayEvent" formControlName="allDayEvent" class="w-4 h-4 text-blue-600 rounded" />
+        <label for="allDayEvent" class="ml-2 text-sm font-medium text-slate-700">
+          All Day Event
+        </label>
+      </div>
+
+      <!-- Date and Time Row -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-2" RequiredSign>
+            Start Date
+          </label>
+          <input type="date" formControlName="startDate"
+            class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-2" RequiredSign>
+            Start Time
+          </label>
+          <input type="time" formControlName="startTime"
+            class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-2" RequiredSign>
+            Start Meridian
+          </label>
+          <select formControlName="startMeridian"
+            class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500">
+            <option>AM</option>
+            <option>PM</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- End Date and Time Row -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-2" RequiredSign>
+            End Date
+          </label>
+          <input type="date" formControlName="endDate"
+            class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-2" RequiredSign>
+            End Time
+          </label>
+          <input type="time" formControlName="endTime"
+            class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-2" RequiredSign>
+            End Meridian
+          </label>
+          <select formControlName="endMeridian"
+            class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500">
+            <option>AM</option>
+            <option>PM</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Resourcer -->
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-slate-700 mb-2">Resourcer</label>
+        <select formControlName="resourcer"
+          class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500">
+          <option value="">None</option>
+          <option>Resource 1</option>
+          <option>Resource 2</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Details Section -->
+    <div class="bg-slate-50 p-5 rounded-lg mb-6">
+      <h2 class="text-lg font-semibold text-slate-800 mb-4">Details</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Description -->
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-2" RequiredSign>
+            Description
+          </label>
+          <textarea formControlName="description" placeholder="Enter description" rows="4"
+            class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500"></textarea>
+        </div>
+
+        <!-- Location -->
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-2">Location</label>
+          <textarea formControlName="location" placeholder="Enter location details" rows="4"
+            class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500"></textarea>
+        </div>
+      </div>
+
+      <!-- Fees / Admission -->
+      <div class="mt-4">
+        <label class="block text-sm font-medium text-slate-700 mb-2">Fees / Admission</label>
+        <textarea formControlName="feesAdmission" placeholder="Enter fees or admission details" rows="4"
+          class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500"></textarea>
+      </div>
+
+      <!-- Display Date/Time -->
+      <div class="mt-4">
+        <label class="block text-sm font-medium text-slate-700 mb-2">Display Date/Time</label>
+        <textarea formControlName="displayDateTime" placeholder="Enter display date/time information" rows="4"
+          class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500"></textarea>
+      </div>
+
+      <!-- Contact Information -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-2">Contact Email</label>
+          <input type="email" formControlName="contactEmail" placeholder="name@example.com"
+            class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-2">Website URL</label>
+          <input type="url" formControlName="websiteUrl" placeholder="https://www.example.com"
+            class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Event Categories Section -->
+    <div class="bg-slate-50 p-5 rounded-lg mb-6">
+      <h2 class="text-lg font-semibold text-slate-800 mb-4">Event Categories</h2>
+      <div class="space-y-3">
+        <div class="flex items-center">
+          <input type="checkbox" id="chamberEvent" formControlName="chamberEvent"
+            class="w-4 h-4 text-blue-600 rounded" />
+          <label for="chamberEvent" class="ml-2 text-sm font-medium text-slate-700">
+            Chamber Event
+          </label>
+        </div>
+        <div class="flex items-center">
+          <input type="checkbox" id="onBehalfOfParkEvent" formControlName="onBehalfOfParkEvent"
+            class="w-4 h-4 text-blue-600 rounded" />
+          <label for="onBehalfOfParkEvent" class="ml-2 text-sm font-medium text-slate-700">
+            On behalf of Park Event
+          </label>
+        </div>
+        <div class="flex items-center">
+          <input type="checkbox" id="memberEvent" formControlName="memberEvent" class="w-4 h-4 text-blue-600 rounded" />
+          <label for="memberEvent" class="ml-2 text-sm font-medium text-slate-700">
+            Member Event
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Photos & Images Section -->
+    <div class="bg-slate-50 p-5 rounded-lg mb-6">
+      <h2 class="text-lg font-semibold text-slate-800 mb-4">Photos & Images</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <!-- Main Event Photo -->
+        <div class="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center">
+          <svg class="mx-auto h-12 w-12 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+          </svg>
+          <p class="mt-2 text-xs text-slate-600">
+            Drag & drop or click to upload
+          </p>
+          <p class="text-xs text-slate-500">Recommended size: 1200x630px</p>
+          <input type="file" accept="image/*" (change)="onPhotoSelect($event, 'Main Event Photo')" class="hidden"
+            #mainPhotoInput />
+          <button type="button" (click)="mainPhotoInput.click()"
+            class="mt-3 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm font-medium">
+            Add Image
+          </button>
+        </div>
+
+        <!-- Secondary Event Logo -->
+        <div class="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center">
+          <svg class="mx-auto h-12 w-12 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+          </svg>
+          <p class="mt-2 text-xs text-slate-600">
+            Drag & drop or click to upload
+          </p>
+          <p class="text-xs text-slate-500">Recommended size: 200x200px</p>
+          <input type="file" accept="image/*" (change)="onPhotoSelect($event, 'Secondary Event Logo')" class="hidden"
+            #secondaryLogoInput />
+          <button type="button" (click)="secondaryLogoInput.click()"
+            class="mt-3 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm font-medium">
+            Add Image
+          </button>
+        </div>
+
+        <!-- Event Featured Photo -->
+        <div class="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center">
+          <svg class="mx-auto h-12 w-12 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+          </svg>
+          <p class="mt-2 text-xs text-slate-600">
+            Drag & drop or click to upload
+          </p>
+          <p class="text-xs text-slate-500">Recommended size: 1200x630px</p>
+          <input type="file" accept="image/*" (change)="onPhotoSelect($event, 'Event Featured Photo')" class="hidden"
+            #featuredPhotoInput />
+          <button type="button" (click)="featuredPhotoInput.click()"
+            class="mt-3 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm font-medium">
+            Add Image
+          </button>
+        </div>
+      </div>
+
+      <!-- Additional Photos -->
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-3">
+          Additional Photos
+        </label>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+          <div class="border-2 border-dashed border-slate-300 rounded-lg p-4 text-center">
+            <svg class="mx-auto h-8 w-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+            </svg>
+            <input type="file" multiple accept="image/*" (change)="onAdditionalPhotosSelect($event)" class="hidden"
+              #additionalPhotosInput />
+            <button type="button" (click)="additionalPhotosInput.click()"
+              class="mt-2 px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 text-xs font-medium">
+              Add Image
+            </button>
+          </div>
+          <!-- Display additional photos -->
+          <ng-container *ngFor="let photo of additionalPhotos; let i = index">
+            <div class="relative border border-slate-300 rounded-lg p-2">
+              <img [src]="photo.name" alt="Photo" class="w-full h-auto rounded" />
+              <button type="button" (click)="removeAdditionalPhoto(i)"
+                class="absolute top-1 right-1 px-2 py-1 bg-red-600 text-white rounded text-xs">
+                Remove
+              </button>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <!-- Image Caption -->
+      <div class="mt-4">
+        <label class="block text-sm font-medium text-slate-700 mb-2">Image Caption</label>
+        <input type="text" formControlName="imageCaptions" placeholder="Enter image captions"
+          class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500" />
+      </div>
+    </div>
+
+    <!-- Meta Description Section -->
+    <div class="bg-slate-50 p-5 rounded-lg mb-6">
+      <h2 class="text-lg font-semibold text-slate-800 mb-4">Meta Information</h2>
+
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-slate-700 mb-2">
+          Meta Description
+        </label>
+        <p class="text-xs text-slate-600 mb-2">
+          A brief summary of your event that will be used for search results and social media (max 150 characters)
+        </p>
+        <textarea formControlName="metaDescription" placeholder="Enter meta description" rows="3"
+          class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500"></textarea>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-slate-700 mb-2">
+          Search Description
+        </label>
+        <p class="text-xs text-slate-600 mb-2">
+          Detailed description for search results (max 300 characters)
+        </p>
+        <textarea formControlName="searchDescription" placeholder="Enter search description" rows="3"
+          class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500"></textarea>
+      </div>
+    </div>
+
+    <!-- Map Service Section -->
+    <div class="bg-slate-50 p-5 rounded-lg mb-6">
+      <h2 class="text-lg font-semibold text-slate-800 mb-4">Map Service</h2>
+
+      <div class="space-y-3">
+        <div class="flex items-center">
+          <input type="radio" id="mapNone" name="mapService" value="none" formControlName="mapService"
+            class="w-4 h-4 text-blue-600" />
+          <label for="mapNone" class="ml-2 text-sm font-medium text-slate-700">
+            None
+          </label>
+        </div>
+        <div class="flex items-center">
+          <input type="radio" id="mapGoogle" name="mapService" value="google" formControlName="mapService"
+            class="w-4 h-4 text-blue-600" />
+          <label for="mapGoogle" class="ml-2 text-sm font-medium text-slate-700">
+            Google Map
+          </label>
+        </div>
+        <div class="flex items-center">
+          <input type="radio" id="mapYoutube" name="mapService" value="youtube" formControlName="mapService"
+            class="w-4 h-4 text-blue-600" />
+          <label for="mapYoutube" class="ml-2 text-sm font-medium text-slate-700">
+            YouTube Video
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- YouTube Video Section -->
+    <div class="bg-slate-50 p-5 rounded-lg mb-6">
+      <h2 class="text-lg font-semibold text-slate-800 mb-4">YouTube Video</h2>
+
+      <label class="block text-sm font-medium text-slate-700 mb-2">Video URL</label>
+      <input type="url" formControlName="youtubeUrl" placeholder="https://www.youtube.com/watch?v=..."
+        class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500" />
+      <p class="text-xs text-slate-600 mt-2">
+        Example: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+      </p>
+    </div>
+
+    <!-- Footer Action Buttons -->
+    <div class="flex gap-3 pt-6 border-t border-slate-200">
+      <button type="button" (click)="saveAsDraft()" class="px-6 py-2 btn-primary">
+        Save as Draft
+      </button>
+      <button type="button" (click)="cancel()" class="px-6 py-2 btn-secondary">
+        Cancel
+      </button>
+      <button type="button" (click)="submitForApproval()" class="px-6 py-2 btn-primary">
+        Submit for Approval
+      </button>
+    </div>
+  </form>
+
+</section>

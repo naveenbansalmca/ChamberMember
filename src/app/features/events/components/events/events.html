@@ -1,18 +1,20 @@
-<header class="events-title-bar">Events</header>
+<div class="page-title-bar">
+  <header class="flex flex-col md:flex-row justify-between items-start md:items-center">
+    <div>
+      <h1>Events</h1>
+    </div>
 
-<section class="events-panel">
-
-
-  <div class="border-b-1 pb-[10px] flex justify-end border-b-[#e2e8f2]">
-    <div class="toolbar-actions">
-      <button (click)="openAddEvent('Add')"> <i class="bi bi-plus"></i>
+    <div class="flex space-x-4 mt-4 md:mt-0">
+      <button class="px-4 py-2 btn-primary" (click)="openAddEvent('Add')"> <i class="bi bi-plus"></i>
         Add Event
       </button>
-      <button (click)="openAddEvent('Manage')">Manage Events</button>
+      <button class="px-4 py-2 btn-primary" (click)="openAddEvent('Manage')">Manage Events</button>
     </div>
-  </div>
+  </header>
+</div>
 
 
+<section class="page-panel">
   <div class="panel-toolbar">
     <div class="toolbar-left">
       <span class="results">Results Found: {{ events.length }}</span>
