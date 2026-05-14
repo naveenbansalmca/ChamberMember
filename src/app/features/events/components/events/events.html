@@ -1,27 +1,40 @@
+<header class="events-title-bar">Events</header>
 
-  <header class="events-title-bar">Events</header>
+<section class="events-panel">
 
-  <section class="events-panel">
-    <div class="panel-toolbar">
-      <div class="toolbar-left">
-        <span class="results">Results Found: {{ events.length }}</span>
-        <label>
-          Sort by
-          <select>
-            <option>Date</option>
-          </select>
-        </label>
-      </div>
 
-      <div class="toolbar-actions">
-        <button [class.active]="activeView === 'list'" (click)="switchView('list')">List View</button>
-        <button>Person View</button>
-        <button [class.active]="activeView === 'calendar'" (click)="switchView('calendar')">Calendar View</button>
-      </div>
+  <div class="border-b-1 pb-[10px] flex justify-end border-b-[#e2e8f2]">
+    <div class="toolbar-actions">
+      <button (click)="openAddEvent('Add')"> <i class="bi bi-plus"></i>
+        Add Event
+      </button>
+      <button (click)="openAddEvent('Manage')">Manage Events</button>
+    </div>
+  </div>
+
+
+  <div class="panel-toolbar">
+    <div class="toolbar-left">
+      <span class="results">Results Found: {{ events.length }}</span>
+      <label>
+        Sort by
+        <select>
+          <option>Date</option>
+          <option>A-Z</option>
+        </select>
+      </label>
     </div>
 
-    <div *ngIf="activeView === 'list'">
-      <table mat-table [dataSource]="dataSource" class="events-table">
+    <div class="toolbar-actions">
+      <button [class.active]="activeView === 'list'" (click)="switchView('list')"><i class="bi bi-list"></i>List
+        View</button>
+      <button [class.active]="activeView === 'calendar'" (click)="switchView('calendar')"><i class="bi bi-calendar"></i>
+        Calendar View</button>
+    </div>
+  </div>
+
+  <div *ngIf="activeView === 'list'">
+    <table mat-table [dataSource]="dataSource" class="events-table">
       <ng-container matColumnDef="date">
         <td mat-cell *matCellDef="let event">
           <div class="date-block">
@@ -57,33 +70,39 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <mat-paginator [length]="events.length" [pageSize]="10" [pageSizeOptions]="[10, 20, 30]"
-      showFirstLastButtons aria-label="Select page of events">
+    <mat-paginator [length]="events.length" [pageSize]="10" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons
+      aria-label="Select page of events">
     </mat-paginator>
-    </div>
+  </div>
 
-    <div *ngIf="activeView === 'calendar'" class="calendar-view">
-      <div class="calendar-header-row">
-        <button class="calendar-nav" (click)="prevCalendarMonth()" [disabled]="currentCalendarMonthIndex === 0">◀</button>
-        <div class="calendar-header">{{ currentCalendarMonth?.month }} {{ currentCalendarMonth?.year }}</div>
-        <button class="calendar-nav" (click)="nextCalendarMonth()" [disabled]="currentCalendarMonthIndex >= calendarMonths.length - 1">▶</button>
-      </div>
-      <div class="calendar-grid">
-        <div class="calendar-weekday" *ngFor="let weekday of weekdays">{{ weekday }}</div>
-        <ng-container *ngFor="let week of currentCalendarMonth?.weeks || []">
-          <ng-container *ngFor="let cell of week">
-            <div class="calendar-cell" [class.empty]="!cell">
-              <ng-container *ngIf="cell; else blankCell">
-                <div class="calendar-day">{{ cell.day }}</div>
-                <div *ngIf="cell.events.length; else noEvents">
-                  <button *ngFor="let event of cell.events" class="calendar-event" (click)="viewDetails(event.id)">{{ event.title }}</button>
-                </div>
-                <ng-template #noEvents><div class="calendar-no-event"></div></ng-template>
-              </ng-container>
-              <ng-template #blankCell><div class="calendar-empty"></div></ng-template>
-            </div>
-          </ng-container>
-        </ng-container>
-      </div>
+  <div *ngIf="activeView === 'calendar'" class="calendar-view">
+    <div class="calendar-header-row">
+      <button class="calendar-nav" (click)="prevCalendarMonth()" [disabled]="currentCalendarMonthIndex === 0">◀</button>
+      <div class="calendar-header">{{ currentCalendarMonth.month }} {{ currentCalendarMonth.year }}</div>
+      <button class="calendar-nav" (click)="nextCalendarMonth()"
+        [disabled]="currentCalendarMonthIndex >= calendarMonths.length - 1">▶</button>
     </div>
-  </section>
+    <div class="calendar-grid">
+      <div class="calendar-weekday" *ngFor="let weekday of weekdays">{{ weekday }}</div>
+      <ng-container *ngFor="let week of currentCalendarMonth.weeks || []">
+        <ng-container *ngFor="let cell of week">
+          <div class="calendar-cell" [class.empty]="!cell">
+            <ng-container *ngIf="cell; else blankCell">
+              <div class="calendar-day">{{ cell.day }}</div>
+              <div *ngIf="cell.events.length; else noEvents">
+                <button *ngFor="let event of cell.events" class="calendar-event" (click)="viewDetails(event.id)">{{
+                  event.title }}</button>
+              </div>
+              <ng-template #noEvents>
+                <div class="calendar-no-event"></div>
+              </ng-template>
+            </ng-container>
+            <ng-template #blankCell>
+              <div class="calendar-empty"></div>
+            </ng-template>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</section>

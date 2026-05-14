@@ -33,7 +33,7 @@ export class EventsComponent implements AfterViewInit {
   readonly weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   readonly monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -174,5 +174,10 @@ export class EventsComponent implements AfterViewInit {
         title: `${seed.title} #${idx + 1}`
       };
     });
+  }
+
+  openAddEvent(Component: 'Add' | 'Manage' = 'Add') {
+    debugger;
+    this.router.navigate([`./${Component.toLowerCase()}-event`], { relativeTo: this.route });
   }
 }

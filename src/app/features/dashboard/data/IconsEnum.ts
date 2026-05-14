@@ -8,8 +8,8 @@ export enum IconsEnum {
     SocialFeed = 'bi bi-person',
     CompanyInformation = 'bi bi-building',
     PersonalInformation = 'bi bi-person',
-    Home = 'bi bi-person',
-    Events = 'bi bi-calendar',
+    Home = 'bi bi-house-door',
+    Events = 'bi bi-calendar-date',
     Resources = 'bi bi-folder',
     Settings = 'bi bi-gear'
 }

@@ -4,6 +4,8 @@ import { EventsComponent } from './components/events/events';
 import { AuthGuard } from '../../core/guards/auth-guard';
 import { EventLayoutComponent } from './components/event-layout.component';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
+import { AddEventComponent } from './components/add-event/add-event.component';
+import { ManageEventComponent } from './components/manage-event/manage-event.component';
 
 const routes: Routes = [
 
@@ -12,9 +14,9 @@ const routes: Routes = [
     path: '', component: EventLayoutComponent, data: { sidebarType: 'events' }, canActivate: [AuthGuard],
     children: [
       { path: '', component: EventsComponent, data: { sidebarType: 'events' }, canActivate: [AuthGuard] },
-      { path: 'event-details/:id', component: EventDetailsComponent, data: { sidebarType: 'events' }, canActivate: [AuthGuard] }
-
-
+      { path: 'event-details/:id', component: EventDetailsComponent, data: { sidebarType: 'events' }, canActivate: [AuthGuard] },
+      { path: 'add-event', component: AddEventComponent, data: { sidebarType: 'events' }, canActivate: [AuthGuard] },
+      { path: 'manage-event', component: ManageEventComponent, data: { sidebarType: 'events' }, canActivate: [AuthGuard] }
     ]
 
   },

@@ -12,6 +12,5 @@ export class EventsAsideComponent {
   readonly quickActions = [
     'Events I\'m registered for',
     'Events I\'m attending/watching',
-    'Post an Event'
   ];
 }
