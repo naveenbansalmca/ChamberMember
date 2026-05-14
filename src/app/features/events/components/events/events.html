@@ -49,7 +49,12 @@
         <td mat-cell *matCellDef="let event">
           <div class="event-info">
             <h4>{{ event.title }}</h4>
-            <p class="time">{{ event.dateTime }}</p>
+            <p class="time">{{ event.startDate | date:'EEEE, d MMM yyyy | h:mm a' }}
+              <span *ngIf="(event.startDate | date:'d MMM yyyy')== (event.endDate | date:'d MMM yyyy')"> - {{
+                event.endDate | date:'h:mm a' }}</span>
+              <span *ngIf="(event.startDate | date:'d MMM yyyy')!= (event.endDate | date:'d MMM yyyy')"> - {{
+                event.endDate | date:'EEEE, d MMM yyyy | h:mm a' }}</span>
+            </p>
             <p>{{ event.description }}</p>
           </div>
         </td>
@@ -60,7 +65,8 @@
           <div class="event-meta">
             <p class="type">Event</p>
             <ul>
-              <li *ngFor="let badge of event.badges">{{ badge }}</li>
+              <li>Registartion Required</li>
+              <li>Location is exclusive</li>
             </ul>
             <button (click)="viewDetails(event.id)">View Details</button>
           </div>
