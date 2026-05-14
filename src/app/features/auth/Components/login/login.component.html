@@ -10,7 +10,9 @@
       <input type="password" id="password" formControlName="password" required>
     </div>
 
-    <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+    <div class="error-message" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
 
     <button type="submit" [disabled]="!loginForm.valid || isLoading">
       <span *ngIf="!isLoading">Login</span>

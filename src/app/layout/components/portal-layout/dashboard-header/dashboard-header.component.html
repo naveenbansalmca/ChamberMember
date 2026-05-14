@@ -10,12 +10,20 @@
     <input type="text" placeholder="Search..." />
   </div>
   <div class="profile">
-    <div class="avatar"></div>
+    <div class="avatar cursor-pointer" (click)="toggleDropdown()">
+      <div class="absolute top-full left-0 bg-white border border-gray-300 rounded-md shadow-lg z-50 min-w-40 p-1"
+        *ngIf="showDropdown" (mouseleave)="showDropdown = false">
+        <button class="block w-full px-3 py-2 text-left text-gray-700 hover:bg-gray-100 rounded"
+          (click)="onAccountSettings()">Account Settings</button>
+        <button class="block w-full px-3 py-2 text-left text-gray-700 hover:bg-gray-100 rounded"
+          (click)="onLogout()">Logout</button>
+      </div>
+    </div>
     <div>
       <p class="welcome">Welcome back,</p>
       <p class="name">{{ memberName }}</p>
       <p class="location">{{ memberLocation }}</p>
     </div>
-    <button class="account-btn">Account Settings</button>
+
   </div>
 </header>
