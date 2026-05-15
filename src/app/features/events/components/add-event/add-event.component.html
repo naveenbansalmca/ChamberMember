@@ -225,6 +225,17 @@
             </div>
           </ng-template>
 
+          <div *ngIf="eventHeaderPhoto && (eventHeaderPhotoProgress > 0 || eventHeaderPhotoUploaded || eventHeaderPhotoError)" class="mb-3 text-left">
+            <div class="h-2 bg-slate-200 rounded overflow-hidden">
+              <div class="h-full bg-blue-600" [style.width.%]="eventHeaderPhotoProgress"></div>
+            </div>
+            <p class="text-xs mt-1">
+              {{ eventHeaderPhotoProgress }}% 
+              <span *ngIf="eventHeaderPhotoUploaded" class="text-green-600">Uploaded</span>
+              <span *ngIf="eventHeaderPhotoError" class="text-red-600">{{ eventHeaderPhotoError }}</span>
+            </p>
+          </div>
+
           <input type="file" accept="image/*" (change)="onPhotoSelect($event, 'Event Header Photo')" class="hidden" #headerPhotoInput />
           <button type="button" (click)="headerPhotoInput.click()"
             class="mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm font-medium">
@@ -251,6 +262,17 @@
             </div>
           </ng-template>
 
+          <div *ngIf="mainEventPhoto && (mainEventPhotoProgress > 0 || mainEventPhotoUploaded || mainEventPhotoError)" class="mb-3 text-left">
+            <div class="h-2 bg-slate-200 rounded overflow-hidden">
+              <div class="h-full bg-blue-600" [style.width.%]="mainEventPhotoProgress"></div>
+            </div>
+            <p class="text-xs mt-1">
+              {{ mainEventPhotoProgress }}% 
+              <span *ngIf="mainEventPhotoUploaded" class="text-green-600">Uploaded</span>
+              <span *ngIf="mainEventPhotoError" class="text-red-600">{{ mainEventPhotoError }}</span>
+            </p>
+          </div>
+
           <input type="file" accept="image/*" (change)="onPhotoSelect($event, 'Main Event Photo')" class="hidden" #mainPhotoInput />
           <button type="button" (click)="mainPhotoInput.click()"
             class="mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm font-medium">
@@ -276,6 +298,17 @@
               <p class="text-xs text-slate-400">No search logo selected yet.</p>
             </div>
           </ng-template>
+
+          <div *ngIf="searchResultsLogo && (searchResultsLogoProgress > 0 || searchResultsLogoUploaded || searchResultsLogoError)" class="mb-3 text-left">
+            <div class="h-2 bg-slate-200 rounded overflow-hidden">
+              <div class="h-full bg-blue-600" [style.width.%]="searchResultsLogoProgress"></div>
+            </div>
+            <p class="text-xs mt-1">
+              {{ searchResultsLogoProgress }}% 
+              <span *ngIf="searchResultsLogoUploaded" class="text-green-600">Uploaded</span>
+              <span *ngIf="searchResultsLogoError" class="text-red-600">{{ searchResultsLogoError }}</span>
+            </p>
+          </div>
 
           <input type="file" accept="image/*" (change)="onPhotoSelect($event, 'Search Results Logo')" class="hidden" #searchLogoInput />
           <button type="button" (click)="searchLogoInput.click()"
@@ -312,6 +345,16 @@
               class="absolute top-1 right-1 px-2 py-1 bg-red-600 text-white rounded text-xs">
               Remove
             </button>
+            <div class="p-2 bg-white">
+              <div class="h-2 bg-slate-200 rounded overflow-hidden">
+                <div class="h-full bg-blue-600" [style.width.%]="photo.progress"></div>
+              </div>
+              <p class="text-[10px] mt-1 text-slate-500">
+                {{ photo.progress }}% 
+                <span *ngIf="photo.uploaded" class="text-green-600">Uploaded</span>
+                <span *ngIf="photo.error" class="text-red-600">{{ photo.error }}</span>
+              </p>
+            </div>
           </div>
         </div>
       </div>

@@ -3,44 +3,24 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RequiredDirective } from "../../../../shared/styles/directive/required.directive";
+import { from, of } from 'rxjs';
+import { EventService } from '../../Services/event.service';
+import { catchError, finalize, map, mergeMap, tap } from 'rxjs/operators';
 import {
-  ClassicEditor,
-  Essentials,
-  Paragraph,
-  Bold,
-  Italic,
-  Underline,
-  Strikethrough,
-  Heading,
-  List,
-  Link,
-  Image,
-  ImageToolbar,
-  ImageCaption,
-  ImageStyle,
-  ImageResize,
-  ImageUpload,
-  Table,
-  TableToolbar,
-  BlockQuote,
-  Alignment,
-  Font,
-  Indent,
-  IndentBlock,
-  Code,
-  CodeBlock,
-  HorizontalLine,
-  MediaEmbed,
-  PasteFromOffice,
-  FontBackgroundColor,
-  FontColor,
-  RemoveFormat,
-  Subscript,
-  Superscript,
-  Undo
+  ClassicEditor, Essentials, Paragraph, Bold, Italic, Underline, Strikethrough, Heading, List, Link, Image, ImageToolbar,
+  ImageCaption, ImageStyle, ImageResize, ImageUpload, Table, TableToolbar, BlockQuote, Alignment, Font, Indent,
+  IndentBlock, Code, CodeBlock, HorizontalLine, MediaEmbed, PasteFromOffice, FontBackgroundColor, FontColor,
+  RemoveFormat, Subscript, Superscript, Undo
 } from 'ckeditor5';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
+interface UploadItem {
+  file: File;
+  category: string;
+  progressSetter: (value: number) => void;
+  uploadedSetter: () => void;
+  errorSetter: (message: string | null) => void;
+}
 
 @Component({
   selector: 'app-add-event',
@@ -53,12 +33,22 @@ export class AddEventComponent implements OnInit {
   eventForm!: FormGroup;
   eventHeaderPhoto: File | null = null;
   eventHeaderPhotoUrl: string | null = null;
+  eventHeaderPhotoProgress = 0;
+  eventHeaderPhotoUploaded = false;
+  eventHeaderPhotoError: string | null = null;
   mainEventPhoto: File | null = null;
   mainEventPhotoUrl: string | null = null;
+  mainEventPhotoProgress = 0;
+  mainEventPhotoUploaded = false;
+  mainEventPhotoError: string | null = null;
   searchResultsLogo: File | null = null;
   searchResultsLogoUrl: string | null = null;
-  galleryPhotos: { file: File; url: string }[] = [];
+  searchResultsLogoProgress = 0;
+  searchResultsLogoUploaded = false;
+  searchResultsLogoError: string | null = null;
+  galleryPhotos: { file: File; url: string; progress: number; uploaded: boolean; error: string | null }[] = [];
   galleryUploadError: string | null = null;
+  isUploading = false;
 
   public Editor = ClassicEditor;
 
@@ -77,45 +67,30 @@ export class AddEventComponent implements OnInit {
       Strikethrough,
       Subscript,
       Superscript,
-
       Heading,
-
       Font,
       FontColor,
       FontBackgroundColor,
-
       Alignment,
-
       List,
-
       Indent,
       IndentBlock,
-
       Link,
-
       Image,
       ImageToolbar,
       ImageCaption,
       ImageStyle,
       ImageResize,
       ImageUpload,
-
       Table,
       TableToolbar,
-
       BlockQuote,
-
       HorizontalLine,
-
       Code,
       CodeBlock,
-
       MediaEmbed,
-
       PasteFromOffice,
-
       RemoveFormat,
-
       Undo
     ],
 
@@ -129,78 +104,52 @@ export class AddEventComponent implements OnInit {
         'redo',
 
         '|',
-
         'removeFormat',
-
         '|',
-
         'heading',
-
         '|',
-
         'fontFamily',
         'fontSize',
         'fontColor',
         'fontBackgroundColor',
-
         '|',
-
         'bold',
         'italic',
         'underline',
         'strikethrough',
-
         '|',
-
         'subscript',
         'superscript',
-
         '|',
-
         'alignment',
-
         '|',
-
         'bulletedList',
         'numberedList',
-
         '|',
-
         'outdent',
         'indent',
-
         '|',
-
         'link',
         'uploadImage',
         'insertTable',
         'mediaEmbed',
-
         '|',
-
         'blockQuote',
-
         '|',
-
         'code',
         'codeBlock',
-
         '|',
-
         'horizontalLine'
       ]
     }
   };
 
-
-
-  constructor(private fb: FormBuilder, private router: Router) { }
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private eventService: EventService) { }
 
   ngOnInit(): void {
-
-
-
-
     this.initializeForm();
   }
 
@@ -242,12 +191,18 @@ export class AddEventComponent implements OnInit {
   }
 
   submitForApproval(): void {
-    console.log('Submitted for approval:', this.eventForm.value);
+    if (this.hasImagesToUpload && !this.isUploading) {
+      this.uploadAllImages();
+    } else {
+      console.log('Submitted for approval:', this.eventForm.value);
+    }
   }
 
   cancel(): void {
     this.router.navigate(['events']);
   }
+
+  selectedFiles: File[] = [];
 
   onPhotoSelect(event: any, photoType: string): void {
     const file = event.target.files?.[0];
@@ -256,12 +211,17 @@ export class AddEventComponent implements OnInit {
       return;
     }
 
+    this.selectedFiles.push(file);
+
     if (photoType === 'Event Header Photo') {
       if (this.eventHeaderPhotoUrl) {
         URL.revokeObjectURL(this.eventHeaderPhotoUrl);
       }
       this.eventHeaderPhoto = file;
       this.eventHeaderPhotoUrl = URL.createObjectURL(file);
+      this.eventHeaderPhotoProgress = 0;
+      this.eventHeaderPhotoUploaded = false;
+      this.eventHeaderPhotoError = null;
       this.eventForm.patchValue({ eventHeaderPhoto: file });
     } else if (photoType === 'Main Event Photo') {
       if (this.mainEventPhotoUrl) {
@@ -269,6 +229,9 @@ export class AddEventComponent implements OnInit {
       }
       this.mainEventPhoto = file;
       this.mainEventPhotoUrl = URL.createObjectURL(file);
+      this.mainEventPhotoProgress = 0;
+      this.mainEventPhotoUploaded = false;
+      this.mainEventPhotoError = null;
       this.eventForm.patchValue({ mainEventPhoto: file });
     } else if (photoType === 'Search Results Logo') {
       if (this.searchResultsLogoUrl) {
@@ -276,6 +239,9 @@ export class AddEventComponent implements OnInit {
       }
       this.searchResultsLogo = file;
       this.searchResultsLogoUrl = URL.createObjectURL(file);
+      this.searchResultsLogoProgress = 0;
+      this.searchResultsLogoUploaded = false;
+      this.searchResultsLogoError = null;
       this.eventForm.patchValue({ searchResultsLogo: file });
     }
 
@@ -288,6 +254,8 @@ export class AddEventComponent implements OnInit {
     if (!files.length) {
       return;
     }
+
+    this.selectedFiles.push(...files);
 
     const totalPhotos = this.galleryPhotos.length + files.length;
 
@@ -302,7 +270,10 @@ export class AddEventComponent implements OnInit {
     files.forEach(file => {
       this.galleryPhotos.push({
         file,
-        url: URL.createObjectURL(file)
+        url: URL.createObjectURL(file),
+        progress: 0,
+        uploaded: false,
+        error: null
       });
     });
 
@@ -343,5 +314,99 @@ export class AddEventComponent implements OnInit {
 
     this.galleryPhotos.splice(index, 1);
     this.eventForm.patchValue({ galleryPhotos: this.galleryPhotos.map(photo => photo.file) });
+  }
+
+  get hasImagesToUpload(): boolean {
+    return !!this.eventHeaderPhoto || !!this.mainEventPhoto || !!this.searchResultsLogo || this.galleryPhotos.length > 0;
+  }
+
+  uploadAllImages(): void {
+    if (this.isUploading) {
+      return;
+    }
+    debugger;
+    const uploadItems: UploadItem[] = [];
+
+    if (this.eventHeaderPhoto) {
+      uploadItems.push({
+        file: this.eventHeaderPhoto,
+        category: 'Event Header Photo',
+        progressSetter: value => this.eventHeaderPhotoProgress = value,
+        uploadedSetter: () => this.eventHeaderPhotoUploaded = true,
+        errorSetter: message => this.eventHeaderPhotoError = message
+      });
+    }
+
+    if (this.mainEventPhoto) {
+      uploadItems.push({
+        file: this.mainEventPhoto,
+        category: 'Main Event Photo',
+        progressSetter: value => this.mainEventPhotoProgress = value,
+        uploadedSetter: () => this.mainEventPhotoUploaded = true,
+        errorSetter: message => this.mainEventPhotoError = message
+      });
+    }
+
+    if (this.searchResultsLogo) {
+      uploadItems.push({
+        file: this.searchResultsLogo,
+        category: 'Search Results Logo',
+        progressSetter: value => this.searchResultsLogoProgress = value,
+        uploadedSetter: () => this.searchResultsLogoUploaded = true,
+        errorSetter: message => this.searchResultsLogoError = message
+      });
+    }
+
+    this.galleryPhotos.forEach(photo => {
+      uploadItems.push({
+        file: photo.file,
+        category: 'Gallery Photos',
+        progressSetter: value => photo.progress = value,
+        uploadedSetter: () => photo.uploaded = true,
+        errorSetter: message => photo.error = message
+      });
+    });
+
+    if (!uploadItems.length) {
+      this.galleryUploadError = 'No images selected to upload.';
+      return;
+    }
+
+    this.galleryUploadError = null;
+    this.isUploading = true;
+
+    from(uploadItems)
+      .pipe(
+        mergeMap(item => this.uploadItem(item), 3),
+        finalize(() => {
+          this.isUploading = false;
+          alert('All images uploaded successfully!');
+        })
+      )
+      .subscribe();
+  }
+
+  private uploadItem(item: UploadItem) {
+    item.errorSetter(null);
+    item.progressSetter(0);
+
+    const formData = new FormData();
+    formData.append('DocumentType', item.category);
+    formData.append('File', item.file, item.file.name);
+
+    return this.eventService.uploadEventImage(formData).pipe(
+      tap(() => {
+        setTimeout(() => {
+          item.progressSetter(100);
+          item.uploadedSetter();
+        }, 100);
+      }),
+      catchError((error) => {
+        console.error('Upload error:', error);
+        item.errorSetter('Upload failed.');
+        return of(item);
+      }),
+      map(() => item)
+    );
   }
 }
