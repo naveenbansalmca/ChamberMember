@@ -113,36 +113,50 @@
     <div class="bg-slate-50 p-5 rounded-lg mb-6">
       <h2 class="text-lg font-semibold text-slate-800 mb-4">Details</h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-1 gap-6">
         <!-- Description -->
         <div>
           <label class="block text-sm font-medium text-slate-700 mb-2" RequiredSign>
             Description
           </label>
-          <textarea formControlName="description" placeholder="Enter description" rows="4"
-            class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500"></textarea>
+          
+          <ckeditor [editor]="Editor" [config]="config" formControlName="description">
+          </ckeditor>
+
+          <!-- <textarea formControlName="description" placeholder="Enter description" rows="4"
+            class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500"></textarea> -->
         </div>
 
         <!-- Location -->
         <div>
           <label class="block text-sm font-medium text-slate-700 mb-2">Location</label>
-          <textarea formControlName="location" placeholder="Enter location details" rows="4"
-            class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500"></textarea>
+
+              <ckeditor [editor]="Editor" [config]="config" formControlName="location">
+          </ckeditor>
+
+
         </div>
       </div>
 
       <!-- Fees / Admission -->
       <div class="mt-4">
         <label class="block text-sm font-medium text-slate-700 mb-2">Fees / Admission</label>
-        <textarea formControlName="feesAdmission" placeholder="Enter fees or admission details" rows="4"
-          class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500"></textarea>
+
+         <ckeditor [editor]="Editor" [config]="config" formControlName="feesAdmission">
+          </ckeditor>
+
+       
       </div>
 
       <!-- Display Date/Time -->
       <div class="mt-4">
-        <label class="block text-sm font-medium text-slate-700 mb-2">Display Date/Time</label>
-        <textarea formControlName="displayDateTime" placeholder="Enter display date/time information" rows="4"
-          class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500"></textarea>
+        <label class="block text-sm font-medium text-slate-700 mb-2">Date/Time</label>
+
+         <ckeditor [editor]="Editor" [config]="config" formControlName="displayDateTime">
+          </ckeditor>
+
+
+     
       </div>
 
       <!-- Contact Information -->

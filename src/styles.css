@@ -2,6 +2,7 @@
 
 @import "tailwindcss";
 
+
 .tabactive {
   font-weight: bolder;
 }
@@ -138,4 +139,29 @@ select {
   padding: 8px 10px;
   font-size: 11px;
   font-weight: 500;
+}
+
+
+input,
+select,
+textarea {
+  background-color: #fff;
+}
+
+
+
+
+
+
+
+
+/* =========================
+   CKEditor Styles
+========================= */
+
+/* Editor container */
+.ck-editor__editable {
+  min-height: 300px;
+  font-size: 16px;
+  line-height: 1.6;
 }
