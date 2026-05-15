@@ -51,7 +51,14 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 })
 export class AddEventComponent implements OnInit {
   eventForm!: FormGroup;
-  additionalPhotos: File[] = [];
+  eventHeaderPhoto: File | null = null;
+  eventHeaderPhotoUrl: string | null = null;
+  mainEventPhoto: File | null = null;
+  mainEventPhotoUrl: string | null = null;
+  searchResultsLogo: File | null = null;
+  searchResultsLogoUrl: string | null = null;
+  galleryPhotos: { file: File; url: string }[] = [];
+  galleryUploadError: string | null = null;
 
   public Editor = ClassicEditor;
 
@@ -218,8 +225,10 @@ export class AddEventComponent implements OnInit {
       chamberEvent: [false],
       onBehalfOfParkEvent: [false],
       memberEvent: [false],
+      eventHeaderPhoto: [null],
       mainEventPhoto: [null],
-      secondaryEventLogo: [null],
+      searchResultsLogo: [null],
+      galleryPhotos: [[]],
       mapService: ['none'],
       youtubeUrl: [''],
       metaDescription: [''],
@@ -242,19 +251,97 @@ export class AddEventComponent implements OnInit {
 
   onPhotoSelect(event: any, photoType: string): void {
     const file = event.target.files?.[0];
-    if (file) {
-      console.log(`Photo selected for ${photoType}:`, file.name);
+
+    if (!file) {
+      return;
     }
+
+    if (photoType === 'Event Header Photo') {
+      if (this.eventHeaderPhotoUrl) {
+        URL.revokeObjectURL(this.eventHeaderPhotoUrl);
+      }
+      this.eventHeaderPhoto = file;
+      this.eventHeaderPhotoUrl = URL.createObjectURL(file);
+      this.eventForm.patchValue({ eventHeaderPhoto: file });
+    } else if (photoType === 'Main Event Photo') {
+      if (this.mainEventPhotoUrl) {
+        URL.revokeObjectURL(this.mainEventPhotoUrl);
+      }
+      this.mainEventPhoto = file;
+      this.mainEventPhotoUrl = URL.createObjectURL(file);
+      this.eventForm.patchValue({ mainEventPhoto: file });
+    } else if (photoType === 'Search Results Logo') {
+      if (this.searchResultsLogoUrl) {
+        URL.revokeObjectURL(this.searchResultsLogoUrl);
+      }
+      this.searchResultsLogo = file;
+      this.searchResultsLogoUrl = URL.createObjectURL(file);
+      this.eventForm.patchValue({ searchResultsLogo: file });
+    }
+
+    console.log(`Photo selected for ${photoType}:`, file.name);
   }
 
-  onAdditionalPhotosSelect(event: any): void {
-    const files = event.target.files;
-    if (files) {
-      this.additionalPhotos = Array.from(files);
+  onGalleryPhotosSelect(event: any): void {
+    const files: File[] = event.target.files ? Array.from(event.target.files) : [];
+
+    if (!files.length) {
+      return;
     }
+
+    const totalPhotos = this.galleryPhotos.length + files.length;
+
+    if (totalPhotos > 8) {
+      const remaining = 8 - this.galleryPhotos.length;
+      this.galleryUploadError = `You can only upload ${remaining} more image(s). Maximum is 8 images.`;
+      return;
+    }
+
+    this.galleryUploadError = null;
+
+    files.forEach(file => {
+      this.galleryPhotos.push({
+        file,
+        url: URL.createObjectURL(file)
+      });
+    });
+
+    this.eventForm.patchValue({ galleryPhotos: this.galleryPhotos.map(photo => photo.file) });
   }
 
-  removeAdditionalPhoto(index: number): void {
-    this.additionalPhotos.splice(index, 1);
+  removeEventHeaderPhoto(): void {
+    if (this.eventHeaderPhotoUrl) {
+      URL.revokeObjectURL(this.eventHeaderPhotoUrl);
+    }
+    this.eventHeaderPhoto = null;
+    this.eventHeaderPhotoUrl = null;
+    this.eventForm.patchValue({ eventHeaderPhoto: null });
+  }
+
+  removeMainEventPhoto(): void {
+    if (this.mainEventPhotoUrl) {
+      URL.revokeObjectURL(this.mainEventPhotoUrl);
+    }
+    this.mainEventPhoto = null;
+    this.mainEventPhotoUrl = null;
+    this.eventForm.patchValue({ mainEventPhoto: null });
+  }
+
+  removeSearchResultsLogo(): void {
+    if (this.searchResultsLogoUrl) {
+      URL.revokeObjectURL(this.searchResultsLogoUrl);
+    }
+    this.searchResultsLogo = null;
+    this.searchResultsLogoUrl = null;
+    this.eventForm.patchValue({ searchResultsLogo: null });
+  }
+
+  removeGalleryPhoto(index: number): void {
+    if (this.galleryPhotos[index]) {
+      URL.revokeObjectURL(this.galleryPhotos[index].url);
+    }
+
+    this.galleryPhotos.splice(index, 1);
+    this.eventForm.patchValue({ galleryPhotos: this.galleryPhotos.map(photo => photo.file) });
   }
 }

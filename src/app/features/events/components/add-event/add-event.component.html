@@ -205,86 +205,114 @@
     <div class="bg-slate-50 p-5 rounded-lg mb-6">
       <h2 class="text-lg font-semibold text-slate-800 mb-4">Photos & Images</h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <!-- Event Header Photo -->
+        <div class="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center">
+          <h3 class="text-sm font-semibold text-slate-800 mb-3">Event Header Photo</h3>
+          <p class="text-xs text-slate-600 mb-2">Upload one header image for the top of the event page.</p>
+          <p class="text-xs text-slate-500 mb-4">Recommended size: 1200x630px</p>
+
+          <div *ngIf="eventHeaderPhotoUrl; else headerPlaceholder" class="mb-4 relative">
+            <img [src]="eventHeaderPhotoUrl" alt="Event header preview" class="mx-auto w-full h-48 object-cover rounded-lg" />
+            <button type="button" (click)="removeEventHeaderPhoto()"
+              class="absolute top-2 right-2 px-2 py-1 bg-red-600 text-white rounded text-xs">
+              Remove
+            </button>
+          </div>
+          <ng-template #headerPlaceholder>
+            <div class="border border-dashed border-slate-300 rounded-lg py-12 mb-4">
+              <p class="text-xs text-slate-400">No header photo selected yet.</p>
+            </div>
+          </ng-template>
+
+          <input type="file" accept="image/*" (change)="onPhotoSelect($event, 'Event Header Photo')" class="hidden" #headerPhotoInput />
+          <button type="button" (click)="headerPhotoInput.click()"
+            class="mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm font-medium">
+            Upload Header Photo
+          </button>
+        </div>
+
         <!-- Main Event Photo -->
         <div class="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center">
-          <svg class="mx-auto h-12 w-12 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-          </svg>
-          <p class="mt-2 text-xs text-slate-600">
-            Drag & drop or click to upload
-          </p>
-          <p class="text-xs text-slate-500">Recommended size: 1200x630px</p>
-          <input type="file" accept="image/*" (change)="onPhotoSelect($event, 'Main Event Photo')" class="hidden"
-            #mainPhotoInput />
+          <h3 class="text-sm font-semibold text-slate-800 mb-3">Main Event Photo</h3>
+          <p class="text-xs text-slate-600 mb-2">Upload one image to represent the event in listings.</p>
+          <p class="text-xs text-slate-500 mb-4">Recommended size: 1200x630px</p>
+
+          <div *ngIf="mainEventPhotoUrl; else mainPlaceholder" class="mb-4 relative">
+            <img [src]="mainEventPhotoUrl" alt="Main event preview" class="mx-auto w-full h-48 object-cover rounded-lg" />
+            <button type="button" (click)="removeMainEventPhoto()"
+              class="absolute top-2 right-2 px-2 py-1 bg-red-600 text-white rounded text-xs">
+              Remove
+            </button>
+          </div>
+          <ng-template #mainPlaceholder>
+            <div class="border border-dashed border-slate-300 rounded-lg py-12 mb-4">
+              <p class="text-xs text-slate-400">No main photo selected yet.</p>
+            </div>
+          </ng-template>
+
+          <input type="file" accept="image/*" (change)="onPhotoSelect($event, 'Main Event Photo')" class="hidden" #mainPhotoInput />
           <button type="button" (click)="mainPhotoInput.click()"
-            class="mt-3 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm font-medium">
-            Add Image
+            class="mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm font-medium">
+            Upload Main Photo
           </button>
         </div>
 
-        <!-- Secondary Event Logo -->
+        <!-- Search Results Logo -->
         <div class="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center">
-          <svg class="mx-auto h-12 w-12 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-          </svg>
-          <p class="mt-2 text-xs text-slate-600">
-            Drag & drop or click to upload
-          </p>
-          <p class="text-xs text-slate-500">Recommended size: 200x200px</p>
-          <input type="file" accept="image/*" (change)="onPhotoSelect($event, 'Secondary Event Logo')" class="hidden"
-            #secondaryLogoInput />
-          <button type="button" (click)="secondaryLogoInput.click()"
-            class="mt-3 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm font-medium">
-            Add Image
+          <h3 class="text-sm font-semibold text-slate-800 mb-3">Search Results Logo</h3>
+          <p class="text-xs text-slate-600 mb-2">Upload one logo image for search result cards.</p>
+          <p class="text-xs text-slate-500 mb-4">Recommended size: 200x200px</p>
+
+          <div *ngIf="searchResultsLogoUrl; else logoPlaceholder" class="mb-4 relative">
+            <img [src]="searchResultsLogoUrl" alt="Search logo preview" class="mx-auto w-full h-48 object-cover rounded-lg" />
+            <button type="button" (click)="removeSearchResultsLogo()"
+              class="absolute top-2 right-2 px-2 py-1 bg-red-600 text-white rounded text-xs">
+              Remove
+            </button>
+          </div>
+          <ng-template #logoPlaceholder>
+            <div class="border border-dashed border-slate-300 rounded-lg py-12 mb-4">
+              <p class="text-xs text-slate-400">No search logo selected yet.</p>
+            </div>
+          </ng-template>
+
+          <input type="file" accept="image/*" (change)="onPhotoSelect($event, 'Search Results Logo')" class="hidden" #searchLogoInput />
+          <button type="button" (click)="searchLogoInput.click()"
+            class="mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm font-medium">
+            Upload Search Logo
           </button>
         </div>
 
-        <!-- Event Featured Photo -->
+        <!-- Gallery Photos -->
         <div class="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center">
-          <svg class="mx-auto h-12 w-12 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-          </svg>
-          <p class="mt-2 text-xs text-slate-600">
-            Drag & drop or click to upload
-          </p>
-          <p class="text-xs text-slate-500">Recommended size: 1200x630px</p>
-          <input type="file" accept="image/*" (change)="onPhotoSelect($event, 'Event Featured Photo')" class="hidden"
-            #featuredPhotoInput />
-          <button type="button" (click)="featuredPhotoInput.click()"
-            class="mt-3 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm font-medium">
-            Add Image
+          <h3 class="text-sm font-semibold text-slate-800 mb-3">Gallery Photos</h3>
+          <p class="text-xs text-slate-600 mb-2">Upload up to 8 gallery images for the event.</p>
+          <p class="text-xs text-slate-500 mb-4">Select multiple files in one upload.</p>
+          <input type="file" multiple accept="image/*" (change)="onGalleryPhotosSelect($event)" class="hidden" #galleryPhotosInput />
+          <button type="button" (click)="galleryPhotosInput.click()"
+            class="mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm font-medium">
+            Upload Gallery Photos
           </button>
+          <p class="text-xs text-slate-500 mt-3">
+            {{ galleryPhotos.length }} / 8 selected
+          </p>
+          <p *ngIf="galleryUploadError" class="text-xs text-red-600 mt-2">
+            {{ galleryUploadError }}
+          </p>
         </div>
       </div>
 
-      <!-- Additional Photos -->
-      <div>
-        <label class="block text-sm font-medium text-slate-700 mb-3">
-          Additional Photos
-        </label>
-        <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
-          <div class="border-2 border-dashed border-slate-300 rounded-lg p-4 text-center">
-            <svg class="mx-auto h-8 w-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-            </svg>
-            <input type="file" multiple accept="image/*" (change)="onAdditionalPhotosSelect($event)" class="hidden"
-              #additionalPhotosInput />
-            <button type="button" (click)="additionalPhotosInput.click()"
-              class="mt-2 px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 text-xs font-medium">
-              Add Image
+      <div *ngIf="galleryPhotos.length" class="mb-4">
+        <label class="block text-sm font-medium text-slate-700 mb-3">Selected Gallery Photos</label>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div *ngFor="let photo of galleryPhotos; let i = index" class="relative border border-slate-300 rounded-lg overflow-hidden">
+            <img [src]="photo.url" alt="Gallery photo {{ i + 1 }}" class="w-full h-32 object-cover" />
+            <button type="button" (click)="removeGalleryPhoto(i)"
+              class="absolute top-1 right-1 px-2 py-1 bg-red-600 text-white rounded text-xs">
+              Remove
             </button>
           </div>
-          <!-- Display additional photos -->
-          <ng-container *ngFor="let photo of additionalPhotos; let i = index">
-            <div class="relative border border-slate-300 rounded-lg p-2">
-              <img [src]="photo.name" alt="Photo" class="w-full h-auto rounded" />
-              <button type="button" (click)="removeAdditionalPhoto(i)"
-                class="absolute top-1 right-1 px-2 py-1 bg-red-600 text-white rounded text-xs">
-                Remove
-              </button>
-            </div>
-          </ng-container>
         </div>
       </div>
 
