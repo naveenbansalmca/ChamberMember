@@ -1,21 +1,17 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RequiredDirective } from "../../../../shared/styles/directive/required.directive";
-import { from, of } from 'rxjs';
+import { from, of, Observable } from 'rxjs';
 import { EventService } from '../../Services/event.service';
-import { catchError, finalize, map, mergeMap, tap } from 'rxjs/operators';
-import {
-  ClassicEditor, Essentials, Paragraph, Bold, Italic, Underline, Strikethrough, Heading, List, Link, Image, ImageToolbar,
-  ImageCaption, ImageStyle, ImageResize, ImageUpload, Table, TableToolbar, BlockQuote, Alignment, Font, Indent,
-  IndentBlock, Code, CodeBlock, HorizontalLine, MediaEmbed, PasteFromOffice, FontBackgroundColor, FontColor,
-  RemoveFormat, Subscript, Superscript, Undo
-} from 'ckeditor5';
+import { catchError, finalize, map, mergeMap, tap, toArray } from 'rxjs/operators';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
+import { CKEDITOR_CONFIG, CKEDITOR_EDITOR } from '../../../../shared/ckeditor.config';
+import { EventCreateRequest } from '../../Models/event-create-request.model';
 
 interface UploadItem {
   file: File;
@@ -23,6 +19,14 @@ interface UploadItem {
   progressSetter: (value: number) => void;
   uploadedSetter: () => void;
   errorSetter: (message: string | null) => void;
+}
+
+interface UploadResult {
+  category: string;
+  fileName: string;
+  url?: string;
+  error?: string | null;
+  response?: any;
 }
 
 @Component({
@@ -56,7 +60,8 @@ export class AddEventComponent implements OnInit {
   galleryUploadError: string | null = null;
   isUploading = false;
 
-  public Editor = ClassicEditor;
+  public Editor = CKEDITOR_EDITOR;
+  public config = CKEDITOR_CONFIG;
 
   content = '';
 
@@ -67,96 +72,6 @@ export class AddEventComponent implements OnInit {
   selectedTimes = {
     start: { hour: '12', minute: '00', meridian: 'PM' },
     end: { hour: '12', minute: '00', meridian: 'PM' }
-  };
-
-  config = {
-
-    licenseKey: 'GPL',
-
-    plugins: [
-      Essentials,
-      Paragraph,
-      Bold,
-      Italic,
-      Underline,
-      Strikethrough,
-      Subscript,
-      Superscript,
-      Heading,
-      Font,
-      FontColor,
-      FontBackgroundColor,
-      Alignment,
-      List,
-      Indent,
-      IndentBlock,
-      Link,
-      Image,
-      ImageToolbar,
-      ImageCaption,
-      ImageStyle,
-      ImageResize,
-      ImageUpload,
-      Table,
-      TableToolbar,
-      BlockQuote,
-      HorizontalLine,
-      Code,
-      CodeBlock,
-      MediaEmbed,
-      PasteFromOffice,
-      RemoveFormat,
-      Undo
-    ],
-
-    toolbar:
-    {
-      shouldNotGroupWhenFull: true,
-
-      items: [
-
-        'undo',
-        'redo',
-
-        '|',
-        'removeFormat',
-        '|',
-        'heading',
-        '|',
-        'fontFamily',
-        'fontSize',
-        'fontColor',
-        'fontBackgroundColor',
-        '|',
-        'bold',
-        'italic',
-        'underline',
-        'strikethrough',
-        '|',
-        'subscript',
-        'superscript',
-        '|',
-        'alignment',
-        '|',
-        'bulletedList',
-        'numberedList',
-        '|',
-        'outdent',
-        'indent',
-        '|',
-        'link',
-        'uploadImage',
-        'insertTable',
-        'mediaEmbed',
-        '|',
-        'blockQuote',
-        '|',
-        'code',
-        'codeBlock',
-        '|',
-        'horizontalLine'
-      ]
-    }
   };
 
   constructor(
@@ -171,20 +86,20 @@ export class AddEventComponent implements OnInit {
 
   initializeForm(): void {
     this.eventForm = this.fb.group({
-      eventTitle: [''],
+      eventTitle: ['', Validators.required],
       allDayEvent: [false],
-      startDate: [''],
-      startTime: [''],
+      startDate: ['', Validators.required],
+      startTime: ['', Validators.required],
       startMeridian: ['AM'],
-      endDate: [''],
-      endTime: [''],
+      endDate: ['', Validators.required],
+      endTime: ['', Validators.required],
       endMeridian: ['AM'],
       resourcer: ['0'],
       description: [''],
       location: [''],
       feesAdmission: [''],
       displayDateTime: [''],
-      contactEmail: [''],
+      contactEmail: ['', [Validators.required, Validators.email]],
       websiteUrl: [''],
       chamberEvent: [false],
       onBehalfOfParkEvent: [false],
@@ -199,6 +114,38 @@ export class AddEventComponent implements OnInit {
       searchDescription: [''],
       imageCaptions: ['']
     });
+
+    this.initializeTimeValidators();
+  }
+
+  private initializeTimeValidators(): void {
+    const allDayControl = this.eventForm.get('allDayEvent');
+
+    this.setTimeValidators(allDayControl?.value ?? false);
+    allDayControl?.valueChanges.subscribe(isAllDay => this.setTimeValidators(isAllDay));
+  }
+
+  private setTimeValidators(isAllDay: boolean): void {
+    const startTimeControl = this.eventForm.get('startTime');
+    const endTimeControl = this.eventForm.get('endTime');
+
+    if (isAllDay) {
+      startTimeControl?.clearValidators();
+      startTimeControl?.disable({ emitEvent: false });
+      startTimeControl?.updateValueAndValidity({ emitEvent: false });
+
+      endTimeControl?.clearValidators();
+      endTimeControl?.disable({ emitEvent: false });
+      endTimeControl?.updateValueAndValidity({ emitEvent: false });
+    } else {
+      startTimeControl?.setValidators([Validators.required]);
+      startTimeControl?.enable({ emitEvent: false });
+      startTimeControl?.updateValueAndValidity({ emitEvent: false });
+
+      endTimeControl?.setValidators([Validators.required]);
+      endTimeControl?.enable({ emitEvent: false });
+      endTimeControl?.updateValueAndValidity({ emitEvent: false });
+    }
   }
 
   saveAsDraft(): void {
@@ -206,11 +153,78 @@ export class AddEventComponent implements OnInit {
   }
 
   submitForApproval(): void {
-    if (this.hasImagesToUpload && !this.isUploading) {
-      this.uploadAllImages();
-    } else {
-      console.log('Submitted for approval:', this.eventForm.value);
+    this.eventForm.markAllAsTouched();
+
+    if (this.eventForm.invalid) {
+      console.warn('Form invalid:', this.eventForm.value);
+      return;
     }
+
+    if (this.isUploading) {
+      return;
+    }
+
+    if (this.hasImagesToUpload) {
+      this.isUploading = true;
+      this.uploadAllImages().pipe(
+        finalize(() => this.isUploading = false)
+      ).subscribe({
+        next: (uploadResults: UploadResult[]) => this.submitEvent(uploadResults),
+        error: (error: any) => console.error('Image upload failed:', error)
+      });
+    } else {
+      this.submitEvent([]);
+    }
+  }
+
+  private submitEvent(uploadResults: UploadResult[]): void {
+    const eventRequest = this.buildEventRequest(uploadResults);
+
+    this.eventService.saveEvent(eventRequest).pipe(
+      finalize(() => {
+        // additional cleanup if needed
+      })
+    ).subscribe({
+      next: response => {
+        console.log('Event saved successfully:', response);
+      },
+      error: error => {
+        console.error('Event save failed:', error);
+      }
+    });
+  }
+
+  private buildEventRequest(uploadResults: UploadResult[]): EventCreateRequest {
+    const raw = this.eventForm.value;
+
+    return {
+      eventTitle: raw.eventTitle,
+      allDayEvent: raw.allDayEvent,
+      startDate: raw.startDate ? raw.startDate.toString() : null,
+      startTime: raw.startTime || '',
+      endDate: raw.endDate ? raw.endDate.toString() : null,
+      endTime: raw.endTime || '',
+      resourcer: raw.resourcer,
+      description: raw.description,
+      location: raw.location,
+      feesAdmission: raw.feesAdmission,
+      displayDateTime: raw.displayDateTime,
+      contactEmail: raw.contactEmail,
+      websiteUrl: raw.websiteUrl,
+      chamberEvent: raw.chamberEvent,
+      onBehalfOfParkEvent: raw.onBehalfOfParkEvent,
+      memberEvent: raw.memberEvent,
+      mapService: raw.mapService,
+      youtubeUrl: raw.youtubeUrl,
+      metaDescription: raw.metaDescription,
+      searchDescription: raw.searchDescription,
+      imageCaptions: raw.imageCaptions,
+      attachments: uploadResults.map(result => ({
+        category: result.category,
+        fileName: result.fileName,
+        url: result.response?.fileUrl ?? result.response?.url
+      }))
+    };
   }
 
   cancel(): void {
@@ -250,7 +264,7 @@ export class AddEventComponent implements OnInit {
 
   getFormattedTime(field: 'start' | 'end'): string {
     const control = this.eventForm.get(field === 'start' ? 'startTime' : 'endTime');
-    return control?.value || `${this.selectedTimes[field].hour}:${this.selectedTimes[field].minute} ${this.selectedTimes[field].meridian}`;
+    return control?.value || '';
   }
 
   parseTimeString(value: string | null | undefined): { hour: string; minute: string; meridian: 'AM' | 'PM' } {
@@ -385,11 +399,11 @@ export class AddEventComponent implements OnInit {
     return !!this.eventHeaderPhoto || !!this.mainEventPhoto || !!this.searchResultsLogo || this.galleryPhotos.length > 0;
   }
 
-  uploadAllImages(): void {
+  uploadAllImages(): Observable<UploadResult[]> {
     if (this.isUploading) {
-      return;
+      return of([]);
     }
-    debugger;
+
     const uploadItems: UploadItem[] = [];
 
     if (this.eventHeaderPhoto) {
@@ -434,21 +448,15 @@ export class AddEventComponent implements OnInit {
 
     if (!uploadItems.length) {
       this.galleryUploadError = 'No images selected to upload.';
-      return;
+      return of([]);
     }
 
     this.galleryUploadError = null;
-    this.isUploading = true;
 
-    from(uploadItems)
-      .pipe(
-        mergeMap(item => this.uploadItem(item), 3),
-        finalize(() => {
-          this.isUploading = false;
-          alert('All images uploaded successfully!');
-        })
-      )
-      .subscribe();
+    return from(uploadItems).pipe(
+      mergeMap(item => this.uploadItem(item), 3),
+      toArray()
+    );
   }
 
   private uploadItem(item: UploadItem) {
@@ -469,9 +477,19 @@ export class AddEventComponent implements OnInit {
       catchError((error) => {
         console.error('Upload error:', error);
         item.errorSetter('Upload failed.');
-        return of(item);
+        return of({
+          category: item.category,
+          fileName: item.file.name,
+          error: 'Upload failed.',
+          response: null
+        });
       }),
-      map(() => item)
+      map((response) => ({
+        category: item.category,
+        fileName: item.file.name,
+        url: response?.fileUrl ?? response?.url,
+        response
+      }))
     );
   }
 }

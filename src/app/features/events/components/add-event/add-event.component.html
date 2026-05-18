@@ -54,8 +54,9 @@
         <div class="relative time-picker-container">
           <mat-form-field appearance="outline" class="w-full small-date-field">
             <mat-label>Start Time</mat-label>
-            <input matInput readonly [value]="getFormattedTime('start')" (click)="toggleTimePicker('start')"
-              placeholder="HH:MM AM">
+            <input matInput readonly formControlName="startTime" (click)="toggleTimePicker('start')"
+              placeholder="HH:MM AM" [disabled]="eventForm.get('allDayEvent')?.value">
+           
           </mat-form-field>
           <div *ngIf="timePickerOpen === 'start'"
             class="absolute left-0 top-full mt-2 w-full bg-white border border-slate-300 rounded shadow-lg z-50">
@@ -100,8 +101,9 @@
         <div class="relative time-picker-container">
           <mat-form-field appearance="outline" class="w-full small-date-field">
             <mat-label>End Time</mat-label>
-            <input matInput readonly [value]="getFormattedTime('end')" (click)="toggleTimePicker('end')"
-              placeholder="HH:MM AM">
+            <input matInput readonly formControlName="endTime" (click)="toggleTimePicker('end')"
+              placeholder="HH:MM AM" [disabled]="eventForm.get('allDayEvent')?.value">
+          
           </mat-form-field>
           <div *ngIf="timePickerOpen === 'end'"
             class="absolute left-0 top-full mt-2 w-full bg-white border border-slate-300 rounded shadow-lg z-50">
@@ -159,9 +161,7 @@
 
           <ckeditor [editor]="Editor" [config]="config" formControlName="description">
           </ckeditor>
-
-          <!-- <textarea formControlName="description" placeholder="Enter description" rows="4"
-            class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500"></textarea> -->
+          
         </div>
 
         <!-- Location -->

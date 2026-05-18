@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { EventItem } from '../Models/EventItem';
+import { EventCreateRequest } from '../Models/event-create-request.model';
 
 
 
@@ -21,5 +22,9 @@ export class EventService {
 
   uploadEventImage(payload: FormData): Observable<any> {
     return this.http.post(`${environment.apiBaseUrl}ServiceProviders/documents`, payload);
+  }
+
+  saveEvent(payload: EventCreateRequest): Observable<any> {
+    return this.http.post(`${environment.apiBaseUrl}event/CreateEvent`, payload);
   }
 }
