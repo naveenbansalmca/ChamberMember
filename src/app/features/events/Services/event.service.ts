@@ -25,6 +25,6 @@ export class EventService {
   }
 
   saveEvent(payload: EventCreateRequest): Observable<any> {
-    return this.http.post(`${environment.apiBaseUrl}event/CreateEvent`, payload);
+    return this.http.post(`${environment.apiBaseUrl}event/Add-event`, payload);
   }
 }

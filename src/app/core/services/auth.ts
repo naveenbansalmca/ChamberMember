@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,14 @@ export class AuthService {
 
   login(data: any) {
     return this.http.post(`${environment.apiBaseUrl}auth/login`, data);
+  }
+
+  refreshToken() {
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (!refreshToken) {
+      return throwError(() => new Error('No refresh token available'));
+    }
+    return this.http.post(`${environment.apiBaseUrl}auth/refresh`, { refreshToken });
   }
 
   logout() {
