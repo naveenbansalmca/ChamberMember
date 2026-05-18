@@ -1,0 +1,28 @@
+/* Add Event Component Styles */
+::ng-deep .small-date-field {
+  width: 100%;
+}
+
+::ng-deep .small-date-field .mat-mdc-text-field-wrapper {
+  height: 40px !important;
+}
+
+::ng-deep .small-date-field .mat-mdc-form-field-flex {
+  height: 40px !important;
+  align-items: center;
+}
+
+::ng-deep .small-date-field .mat-mdc-input-element {
+  margin-top: -8px;
+}
+
+::ng-deep .small-date-field .mat-mdc-form-field-infix {
+  min-height: 30px !important;
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+}
+
+
+::ng-deep .small-date-field .mdc-floating-label {
+  top: 20px !important;
+}

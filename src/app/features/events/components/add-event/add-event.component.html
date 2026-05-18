@@ -44,7 +44,7 @@
       <!-- Date and Time Row -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         <div>
-          <mat-form-field appearance="outline" class="w-full">
+          <mat-form-field appearance="outline" class="w-full small-date-field">
             <mat-label>Start Date</mat-label>
             <input matInput [matDatepicker]="picker" formControlName="startDate" placeholder="DD-MMM-YYYY">
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
@@ -52,7 +52,7 @@
           </mat-form-field>
         </div>
         <div class="relative time-picker-container">
-          <mat-form-field appearance="outline" class="w-full">
+          <mat-form-field appearance="outline" class="w-full small-date-field">
             <mat-label>Start Time</mat-label>
             <input matInput readonly [value]="getFormattedTime('start')" (click)="toggleTimePicker('start')"
               placeholder="HH:MM AM">
@@ -90,7 +90,7 @@
       <!-- End Date and Time Row -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         <div>
-          <mat-form-field appearance="outline" class="w-full">
+          <mat-form-field appearance="outline" class="w-full small-date-field">
             <mat-label>End Date</mat-label>
             <input matInput [matDatepicker]="picker2" formControlName="endDate" placeholder="DD-MMM-YYYY">
             <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
@@ -98,7 +98,7 @@
           </mat-form-field>
         </div>
         <div class="relative time-picker-container">
-          <mat-form-field appearance="outline" class="w-full">
+          <mat-form-field appearance="outline" class="w-full small-date-field">
             <mat-label>End Time</mat-label>
             <input matInput readonly [value]="getFormattedTime('end')" (click)="toggleTimePicker('end')"
               placeholder="HH:MM AM">
@@ -214,7 +214,7 @@
     <!-- Event Categories Section -->
     <div class="bg-slate-50 p-5 rounded-lg mb-6">
       <h2 class="text-lg font-semibold text-slate-800 mb-4">Event Categories</h2>
-      <div class="space-y-3">
+      <div class="">
         <div class="flex items-center">
           <input type="checkbox" id="chamberEvent" formControlName="chamberEvent"
             class="w-4 h-4 text-blue-600 rounded" />
@@ -448,7 +448,7 @@
     <div class="bg-slate-50 p-5 rounded-lg mb-6">
       <h2 class="text-lg font-semibold text-slate-800 mb-4">Map Service</h2>
 
-      <div class="space-y-3">
+      <div class="">
         <div class="flex items-center">
           <input type="radio" id="mapNone" name="mapService" value="none" formControlName="mapService"
             class="w-4 h-4 text-blue-600" />
