@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,6 +13,9 @@ import {
   RemoveFormat, Subscript, Superscript, Undo
 } from 'ckeditor5';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
 
 interface UploadItem {
   file: File;
@@ -25,7 +28,10 @@ interface UploadItem {
 @Component({
   selector: 'app-add-event',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RequiredDirective, CKEditorModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RequiredDirective, CKEditorModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatInputModule],
   templateUrl: './add-event.component.html',
   styleUrls: ['./add-event.component.css'],
 })
@@ -53,6 +59,15 @@ export class AddEventComponent implements OnInit {
   public Editor = ClassicEditor;
 
   content = '';
+
+  timePickerOpen: '' | 'start' | 'end' = '';
+  hours = Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, '0'));
+  minutes = Array.from({ length: 60 }, (_, i) => String(i).padStart(2, '0'));
+  meridians: Array<'AM' | 'PM'> = ['AM', 'PM'];
+  selectedTimes = {
+    start: { hour: '12', minute: '00', meridian: 'PM' },
+    end: { hour: '12', minute: '00', meridian: 'PM' }
+  };
 
   config = {
 
@@ -164,7 +179,7 @@ export class AddEventComponent implements OnInit {
       endDate: [''],
       endTime: [''],
       endMeridian: ['AM'],
-      resourcer: [''],
+      resourcer: ['0'],
       description: [''],
       location: [''],
       feesAdmission: [''],
@@ -200,6 +215,56 @@ export class AddEventComponent implements OnInit {
 
   cancel(): void {
     this.router.navigate(['events']);
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.time-picker-container')) {
+      this.timePickerOpen = '';
+    }
+  }
+
+  toggleTimePicker(field: 'start' | 'end'): void {
+    if (this.timePickerOpen === field) {
+      this.timePickerOpen = '';
+      return;
+    }
+
+    this.timePickerOpen = field;
+    const control = this.eventForm.get(field === 'start' ? 'startTime' : 'endTime');
+    const parsed = this.parseTimeString(control?.value);
+    this.selectedTimes[field] = parsed;
+  }
+
+  selectTimePart(field: 'start' | 'end', part: 'hour' | 'minute' | 'meridian', value: string): void {
+    this.selectedTimes[field][part] = value as any;
+    this.updateTimeControl(field);
+  }
+
+  updateTimeControl(field: 'start' | 'end'): void {
+    const current = this.selectedTimes[field];
+    const value = `${current.hour}:${current.minute} ${current.meridian}`;
+    this.eventForm.get(field === 'start' ? 'startTime' : 'endTime')?.setValue(value);
+  }
+
+  getFormattedTime(field: 'start' | 'end'): string {
+    const control = this.eventForm.get(field === 'start' ? 'startTime' : 'endTime');
+    return control?.value || `${this.selectedTimes[field].hour}:${this.selectedTimes[field].minute} ${this.selectedTimes[field].meridian}`;
+  }
+
+  parseTimeString(value: string | null | undefined): { hour: string; minute: string; meridian: 'AM' | 'PM' } {
+    if (!value) {
+      return { hour: '12', minute: '00', meridian: 'PM' };
+    }
+    const match = String(value).trim().match(/^(\d{1,2}):(\d{2})(?:\s*(AM|PM))?$/i);
+    if (!match) {
+      return { hour: '12', minute: '00', meridian: 'PM' };
+    }
+    const hour = match[1].padStart(2, '0');
+    const minute = match[2];
+    const meridian = (match[3]?.toUpperCase() as 'AM' | 'PM') || 'AM';
+    return { hour: hour === '00' ? '12' : hour, minute, meridian };
   }
 
   selectedFiles: File[] = [];

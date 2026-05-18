@@ -42,69 +42,106 @@
       </div>
 
       <!-- Date and Time Row -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         <div>
-          <label class="block text-sm font-medium text-slate-700 mb-2" RequiredSign>
-            Start Date
-          </label>
-          <input type="date" formControlName="startDate"
-            class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500" />
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Start Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="startDate" placeholder="DD-MMM-YYYY">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
         </div>
-        <div>
-          <label class="block text-sm font-medium text-slate-700 mb-2" RequiredSign>
-            Start Time
-          </label>
-          <input type="time" formControlName="startTime"
-            class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500" />
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-slate-700 mb-2" RequiredSign>
-            Start Meridian
-          </label>
-          <select formControlName="startMeridian"
-            class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500">
-            <option>AM</option>
-            <option>PM</option>
-          </select>
+        <div class="relative time-picker-container">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Start Time</mat-label>
+            <input matInput readonly [value]="getFormattedTime('start')" (click)="toggleTimePicker('start')"
+              placeholder="HH:MM AM">
+          </mat-form-field>
+          <div *ngIf="timePickerOpen === 'start'"
+            class="absolute left-0 top-full mt-2 w-full bg-white border border-slate-300 rounded shadow-lg z-50">
+            <div class="grid grid-cols-3 divide-x divide-slate-200">
+              <div class="max-h-64 overflow-y-auto">
+                <button *ngFor="let hour of hours" type="button"
+                  class="w-full px-3 py-2 text-left hover:bg-slate-100 focus:outline-none"
+                  [class.bg-blue-600]="selectedTimes.start.hour === hour"
+                  [class.text-white]="selectedTimes.start.hour === hour"
+                  (click)="selectTimePart('start', 'hour', hour)">{{ hour }}</button>
+              </div>
+              <div class="max-h-64 overflow-y-auto">
+                <button *ngFor="let minute of minutes" type="button"
+                  class="w-full px-3 py-2 text-left hover:bg-slate-100 focus:outline-none"
+                  [class.bg-blue-600]="selectedTimes.start.minute === minute"
+                  [class.text-white]="selectedTimes.start.minute === minute"
+                  (click)="selectTimePart('start', 'minute', minute)">{{ minute }}</button>
+              </div>
+              <div class="max-h-64 overflow-y-auto">
+                <button *ngFor="let meridian of meridians" type="button"
+                  class="w-full px-3 py-2 text-left hover:bg-slate-100 focus:outline-none"
+                  [class.bg-blue-600]="selectedTimes.start.meridian === meridian"
+                  [class.text-white]="selectedTimes.start.meridian === meridian"
+                  (click)="selectTimePart('start', 'meridian', meridian)">{{ meridian }}</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
 
       <!-- End Date and Time Row -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         <div>
-          <label class="block text-sm font-medium text-slate-700 mb-2" RequiredSign>
-            End Date
-          </label>
-          <input type="date" formControlName="endDate"
-            class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500" />
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>End Date</mat-label>
+            <input matInput [matDatepicker]="picker2" formControlName="endDate" placeholder="DD-MMM-YYYY">
+            <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
         </div>
-        <div>
-          <label class="block text-sm font-medium text-slate-700 mb-2" RequiredSign>
-            End Time
-          </label>
-          <input type="time" formControlName="endTime"
-            class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500" />
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-slate-700 mb-2" RequiredSign>
-            End Meridian
-          </label>
-          <select formControlName="endMeridian"
-            class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500">
-            <option>AM</option>
-            <option>PM</option>
-          </select>
+        <div class="relative time-picker-container">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>End Time</mat-label>
+            <input matInput readonly [value]="getFormattedTime('end')" (click)="toggleTimePicker('end')"
+              placeholder="HH:MM AM">
+          </mat-form-field>
+          <div *ngIf="timePickerOpen === 'end'"
+            class="absolute left-0 top-full mt-2 w-full bg-white border border-slate-300 rounded shadow-lg z-50">
+            <div class="grid grid-cols-3 divide-x divide-slate-200">
+              <div class="max-h-64 overflow-y-auto">
+                <button *ngFor="let hour of hours" type="button"
+                  class="w-full px-3 py-2 text-left hover:bg-slate-100 focus:outline-none"
+                  [class.bg-blue-600]="selectedTimes.end.hour === hour"
+                  [class.text-white]="selectedTimes.end.hour === hour" (click)="selectTimePart('end', 'hour', hour)">{{
+                  hour }}</button>
+              </div>
+              <div class="max-h-64 overflow-y-auto">
+                <button *ngFor="let minute of minutes" type="button"
+                  class="w-full px-3 py-2 text-left hover:bg-slate-100 focus:outline-none"
+                  [class.bg-blue-600]="selectedTimes.end.minute === minute"
+                  [class.text-white]="selectedTimes.end.minute === minute"
+                  (click)="selectTimePart('end', 'minute', minute)">{{ minute }}</button>
+              </div>
+              <div class="max-h-64 overflow-y-auto">
+                <button *ngFor="let meridian of meridians" type="button"
+                  class="w-full px-3 py-2 text-left hover:bg-slate-100 focus:outline-none"
+                  [class.bg-blue-600]="selectedTimes.end.meridian === meridian"
+                  [class.text-white]="selectedTimes.end.meridian === meridian"
+                  (click)="selectTimePart('end', 'meridian', meridian)">{{ meridian }}</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Resourcer -->
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-slate-700 mb-2">Resourcer</label>
+      <!-- Recurrence -->
+      <div class="mb-4 md:col-2 max-w-[200px]">
+        <label class="block text-sm font-medium text-slate-700 mb-2">Recurrence:</label>
         <select formControlName="resourcer"
           class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500">
-          <option value="">None</option>
-          <option>Resource 1</option>
-          <option>Resource 2</option>
+          <option value="0">None</option>
+          <option value="1">Daily</option>
+          <option value="2">Weekly</option>
+          <option value="3">Monthly</option>
+          <option value="4">Yearly</option>
         </select>
       </div>
     </div>
@@ -119,7 +156,7 @@
           <label class="block text-sm font-medium text-slate-700 mb-2" RequiredSign>
             Description
           </label>
-          
+
           <ckeditor [editor]="Editor" [config]="config" formControlName="description">
           </ckeditor>
 
@@ -131,7 +168,7 @@
         <div>
           <label class="block text-sm font-medium text-slate-700 mb-2">Location</label>
 
-              <ckeditor [editor]="Editor" [config]="config" formControlName="location">
+          <ckeditor [editor]="Editor" [config]="config" formControlName="location">
           </ckeditor>
 
 
@@ -142,21 +179,21 @@
       <div class="mt-4">
         <label class="block text-sm font-medium text-slate-700 mb-2">Fees / Admission</label>
 
-         <ckeditor [editor]="Editor" [config]="config" formControlName="feesAdmission">
-          </ckeditor>
+        <ckeditor [editor]="Editor" [config]="config" formControlName="feesAdmission">
+        </ckeditor>
 
-       
+
       </div>
 
       <!-- Display Date/Time -->
       <div class="mt-4">
         <label class="block text-sm font-medium text-slate-700 mb-2">Date/Time</label>
 
-         <ckeditor [editor]="Editor" [config]="config" formControlName="displayDateTime">
-          </ckeditor>
+        <ckeditor [editor]="Editor" [config]="config" formControlName="displayDateTime">
+        </ckeditor>
 
 
-     
+
       </div>
 
       <!-- Contact Information -->
@@ -164,12 +201,12 @@
         <div>
           <label class="block text-sm font-medium text-slate-700 mb-2">Contact Email</label>
           <input type="email" formControlName="contactEmail" placeholder="name@example.com"
-            class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500" />
+            class="w-full px-3 border border-slate-300 rounded focus:outline-none focus:border-blue-500" />
         </div>
         <div>
           <label class="block text-sm font-medium text-slate-700 mb-2">Website URL</label>
           <input type="url" formControlName="websiteUrl" placeholder="https://www.example.com"
-            class="w-full px-3 py-2 border border-slate-300 rounded focus:outline-none focus:border-blue-500" />
+            class="w-full px-3 border border-slate-300 rounded focus:outline-none focus:border-blue-500" />
         </div>
       </div>
     </div>
@@ -213,7 +250,8 @@
           <p class="text-xs text-slate-500 mb-4">Recommended size: 1200x630px</p>
 
           <div *ngIf="eventHeaderPhotoUrl; else headerPlaceholder" class="mb-4 relative">
-            <img [src]="eventHeaderPhotoUrl" alt="Event header preview" class="mx-auto w-full h-48 object-cover rounded-lg" />
+            <img [src]="eventHeaderPhotoUrl" alt="Event header preview"
+              class="mx-auto w-full h-48 object-cover rounded-lg" />
             <button type="button" (click)="removeEventHeaderPhoto()"
               class="absolute top-2 right-2 px-2 py-1 bg-red-600 text-white rounded text-xs">
               Remove
@@ -225,18 +263,21 @@
             </div>
           </ng-template>
 
-          <div *ngIf="eventHeaderPhoto && (eventHeaderPhotoProgress > 0 || eventHeaderPhotoUploaded || eventHeaderPhotoError)" class="mb-3 text-left">
+          <div
+            *ngIf="eventHeaderPhoto && (eventHeaderPhotoProgress > 0 || eventHeaderPhotoUploaded || eventHeaderPhotoError)"
+            class="mb-3 text-left">
             <div class="h-2 bg-slate-200 rounded overflow-hidden">
               <div class="h-full bg-blue-600" [style.width.%]="eventHeaderPhotoProgress"></div>
             </div>
             <p class="text-xs mt-1">
-              {{ eventHeaderPhotoProgress }}% 
+              {{ eventHeaderPhotoProgress }}%
               <span *ngIf="eventHeaderPhotoUploaded" class="text-green-600">Uploaded</span>
               <span *ngIf="eventHeaderPhotoError" class="text-red-600">{{ eventHeaderPhotoError }}</span>
             </p>
           </div>
 
-          <input type="file" accept="image/*" (change)="onPhotoSelect($event, 'Event Header Photo')" class="hidden" #headerPhotoInput />
+          <input type="file" accept="image/*" (change)="onPhotoSelect($event, 'Event Header Photo')" class="hidden"
+            #headerPhotoInput />
           <button type="button" (click)="headerPhotoInput.click()"
             class="mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm font-medium">
             Upload Header Photo
@@ -250,7 +291,8 @@
           <p class="text-xs text-slate-500 mb-4">Recommended size: 1200x630px</p>
 
           <div *ngIf="mainEventPhotoUrl; else mainPlaceholder" class="mb-4 relative">
-            <img [src]="mainEventPhotoUrl" alt="Main event preview" class="mx-auto w-full h-48 object-cover rounded-lg" />
+            <img [src]="mainEventPhotoUrl" alt="Main event preview"
+              class="mx-auto w-full h-48 object-cover rounded-lg" />
             <button type="button" (click)="removeMainEventPhoto()"
               class="absolute top-2 right-2 px-2 py-1 bg-red-600 text-white rounded text-xs">
               Remove
@@ -262,18 +304,20 @@
             </div>
           </ng-template>
 
-          <div *ngIf="mainEventPhoto && (mainEventPhotoProgress > 0 || mainEventPhotoUploaded || mainEventPhotoError)" class="mb-3 text-left">
+          <div *ngIf="mainEventPhoto && (mainEventPhotoProgress > 0 || mainEventPhotoUploaded || mainEventPhotoError)"
+            class="mb-3 text-left">
             <div class="h-2 bg-slate-200 rounded overflow-hidden">
               <div class="h-full bg-blue-600" [style.width.%]="mainEventPhotoProgress"></div>
             </div>
             <p class="text-xs mt-1">
-              {{ mainEventPhotoProgress }}% 
+              {{ mainEventPhotoProgress }}%
               <span *ngIf="mainEventPhotoUploaded" class="text-green-600">Uploaded</span>
               <span *ngIf="mainEventPhotoError" class="text-red-600">{{ mainEventPhotoError }}</span>
             </p>
           </div>
 
-          <input type="file" accept="image/*" (change)="onPhotoSelect($event, 'Main Event Photo')" class="hidden" #mainPhotoInput />
+          <input type="file" accept="image/*" (change)="onPhotoSelect($event, 'Main Event Photo')" class="hidden"
+            #mainPhotoInput />
           <button type="button" (click)="mainPhotoInput.click()"
             class="mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm font-medium">
             Upload Main Photo
@@ -287,7 +331,8 @@
           <p class="text-xs text-slate-500 mb-4">Recommended size: 200x200px</p>
 
           <div *ngIf="searchResultsLogoUrl; else logoPlaceholder" class="mb-4 relative">
-            <img [src]="searchResultsLogoUrl" alt="Search logo preview" class="mx-auto w-full h-48 object-cover rounded-lg" />
+            <img [src]="searchResultsLogoUrl" alt="Search logo preview"
+              class="mx-auto w-full h-48 object-cover rounded-lg" />
             <button type="button" (click)="removeSearchResultsLogo()"
               class="absolute top-2 right-2 px-2 py-1 bg-red-600 text-white rounded text-xs">
               Remove
@@ -299,18 +344,21 @@
             </div>
           </ng-template>
 
-          <div *ngIf="searchResultsLogo && (searchResultsLogoProgress > 0 || searchResultsLogoUploaded || searchResultsLogoError)" class="mb-3 text-left">
+          <div
+            *ngIf="searchResultsLogo && (searchResultsLogoProgress > 0 || searchResultsLogoUploaded || searchResultsLogoError)"
+            class="mb-3 text-left">
             <div class="h-2 bg-slate-200 rounded overflow-hidden">
               <div class="h-full bg-blue-600" [style.width.%]="searchResultsLogoProgress"></div>
             </div>
             <p class="text-xs mt-1">
-              {{ searchResultsLogoProgress }}% 
+              {{ searchResultsLogoProgress }}%
               <span *ngIf="searchResultsLogoUploaded" class="text-green-600">Uploaded</span>
               <span *ngIf="searchResultsLogoError" class="text-red-600">{{ searchResultsLogoError }}</span>
             </p>
           </div>
 
-          <input type="file" accept="image/*" (change)="onPhotoSelect($event, 'Search Results Logo')" class="hidden" #searchLogoInput />
+          <input type="file" accept="image/*" (change)="onPhotoSelect($event, 'Search Results Logo')" class="hidden"
+            #searchLogoInput />
           <button type="button" (click)="searchLogoInput.click()"
             class="mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm font-medium">
             Upload Search Logo
@@ -322,7 +370,8 @@
           <h3 class="text-sm font-semibold text-slate-800 mb-3">Gallery Photos</h3>
           <p class="text-xs text-slate-600 mb-2">Upload up to 8 gallery images for the event.</p>
           <p class="text-xs text-slate-500 mb-4">Select multiple files in one upload.</p>
-          <input type="file" multiple accept="image/*" (change)="onGalleryPhotosSelect($event)" class="hidden" #galleryPhotosInput />
+          <input type="file" multiple accept="image/*" (change)="onGalleryPhotosSelect($event)" class="hidden"
+            #galleryPhotosInput />
           <button type="button" (click)="galleryPhotosInput.click()"
             class="mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm font-medium">
             Upload Gallery Photos
@@ -339,7 +388,8 @@
       <div *ngIf="galleryPhotos.length" class="mb-4">
         <label class="block text-sm font-medium text-slate-700 mb-3">Selected Gallery Photos</label>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <div *ngFor="let photo of galleryPhotos; let i = index" class="relative border border-slate-300 rounded-lg overflow-hidden">
+          <div *ngFor="let photo of galleryPhotos; let i = index"
+            class="relative border border-slate-300 rounded-lg overflow-hidden">
             <img [src]="photo.url" alt="Gallery photo {{ i + 1 }}" class="w-full h-32 object-cover" />
             <button type="button" (click)="removeGalleryPhoto(i)"
               class="absolute top-1 right-1 px-2 py-1 bg-red-600 text-white rounded text-xs">
@@ -350,7 +400,7 @@
                 <div class="h-full bg-blue-600" [style.width.%]="photo.progress"></div>
               </div>
               <p class="text-[10px] mt-1 text-slate-500">
-                {{ photo.progress }}% 
+                {{ photo.progress }}%
                 <span *ngIf="photo.uploaded" class="text-green-600">Uploaded</span>
                 <span *ngIf="photo.error" class="text-red-600">{{ photo.error }}</span>
               </p>
